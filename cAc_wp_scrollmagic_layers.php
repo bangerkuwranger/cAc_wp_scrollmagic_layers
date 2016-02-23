@@ -47,7 +47,7 @@ function cAc_wpsml_admin_queue() {
 	wp_enqueue_script( 'cAc_wpsml_admin', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ) );
 
 }
-
+add_action( 'admin_enqueue_scripts', 'cAc_wpsml_admin_queue' );
 
 if( ! function_exists('cAc_wpsml_section') ) {
 
