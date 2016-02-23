@@ -123,10 +123,10 @@ if( !$section ) {
 
 }	//end if( !$section )
 
-$html = '<div class="cAc_wpsml-pageSection">';
+$html = '<div class="cAc_wpsml-pageSection sectionID-' . $id .'">';
 
 $html .= '<div class="cAc_wpsml-bg">';
-
+$html .= '<div class="background: blue; height:768px; width: 100%;"></div>'
 $html .= '</div>';
 
 $html .= '<div class="cAc_wpsml-mg">';
