@@ -165,7 +165,7 @@ function cAc_wpsml_load_section() {
 	$response = array();
 	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 	
-		$metas = get_post_meta( invtal( $_POST['id'] ) );
+		$metas = get_post_meta( intval( $_POST['id'] ) );
 		$mediaurl = wp_get_attachment_url( get_post_thumbnail_id( intval( $_POST['id'] ), 'thumbnail') );
 		
 		if( $_POST['bg'] ) {
