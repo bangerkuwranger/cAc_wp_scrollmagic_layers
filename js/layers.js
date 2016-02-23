@@ -59,8 +59,8 @@ jQuery(function($) {
 		
 		loadSectionScene( thisId, bg, mg, content, media, trim );
 		
-		//tweens & scenes (tweens currently commented out
-	)
+		//tweens & scenes (tweens currently commented out)
+	
 		if( bg != null ) {
 			tweens[thisId + "bg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-bg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 500, offset: 0})
