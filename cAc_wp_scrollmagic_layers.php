@@ -42,6 +42,12 @@ function cAc_wpsml_frontend_queue() {
 
 }	//end cAc_wpsml_frontend_queue()
 
+function cAc_wpsml_admin_queue() {
+
+	wp_enqueue_script( 'cAc_wpsml_admin', plugins_url( 'js/admin.js', __FILE__ ), array( 'jquery' ) );
+
+}
+
 
 if( ! function_exists('cAc_wpsml_section') ) {
 
@@ -66,9 +72,9 @@ if( ! function_exists('cAc_wpsml_section') ) {
 			'not_found'             => __( 'Not found', 'cAc_wpsml' ),
 			'not_found_in_trash'    => __( 'Not found in Trash', 'cAc_wpsml' ),
 			'featured_image'        => __( 'Featured Image', 'cAc_wpsml' ),
-			'set_featured_image'    => __( 'Set featured image', 'cAc_wpsml' ),
-			'remove_featured_image' => __( 'Remove featured image', 'cAc_wpsml' ),
-			'use_featured_image'    => __( 'Use as featured image', 'cAc_wpsml' ),
+			'set_featured_image'    => __( 'Set Media Layer', 'cAc_wpsml' ),
+			'remove_featured_image' => __( 'Remove Media Layer', 'cAc_wpsml' ),
+			'use_featured_image'    => __( 'Use as Media Layer', 'cAc_wpsml' ),
 			'insert_into_item'      => __( 'Insert into Layered Page Section', 'cAc_wpsml' ),
 			'uploaded_to_this_item' => __( 'Uploaded to this Layered Page Section', 'cAc_wpsml' ),
 			'items_list'            => __( 'Layered Page Section list', 'cAc_wpsml' ),
@@ -86,6 +92,7 @@ if( ! function_exists('cAc_wpsml_section') ) {
 			'show_in_menu'          => true,
 			'menu_position'         => 20,
 			'menu_icon'             => 'dashicons-admin-page',
+			'register_meta_box_cb'	=> 'cAc_wpsml_section_meta_box',
 			'show_in_admin_bar'     => true,
 			'show_in_nav_menus'     => true,
 			'can_export'            => true,
@@ -100,6 +107,117 @@ if( ! function_exists('cAc_wpsml_section') ) {
 	add_action( 'init', 'cAc_wpsml_section', 0 );
 
 }	//end if( ! function_exists('cAc_wpsml_section') )
+
+
+//section primary editor titles
+add_action( 'edit_form_after_title', 'cAc_wpsml_section_edit_form_after_title' );
+add_action( 'edit_form_after_editor', 'cAc_wpsml_section_edit_form_after_editor' );
+
+function cAc_wpsml_section_edit_form_after_title() {
+
+	$screen = get_current_screen();
+	
+	if( $screen->post_type == 'cAcsmlsection' ) {
+	
+		echo '<div class="postbox" style="margin-top: 20px;"><h2>Content Layer</h2><div class="inside">';
+	
+	}	//end if( $screen->post_type == 'cAcsmlsection' )
+	
+}	//end cAc_wpsml_section_edit_form_after_title()
+
+function cAc_wpsml_section_edit_form_after_editor() {
+
+	$screen = get_current_screen();
+	
+	if( $screen->post_type == 'cAcsmlsection' ) {
+	
+		echo '</div></div>';
+	
+	}	//end if( $screen->post_type == 'sundial_collection' || $screen->post_type == 'sundial_product' )
+	
+}	//end cAc_wpsml_section_edit_form_after_editor()
+
+
+//metabox for custom fields
+
+function cAc_wpsml_section_meta_box() {
+
+	add_meta_box( 'cAc_wpsml_section_layer_data', 'Additional Layers', 'cAc_wpsml_section_meta_box_fields', array( 'cAcsmlsection' ), 'normal', 'core' )
+
+}	//end cAc_wpsml_section_meta_box()
+
+
+function cAc_wpsml_section_meta_box_fields( $section ) {
+
+	$bg_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_bg', true );
+	$bg_image_src = get_attached_file( $bg_image_id );
+	$bg_image = file_get_contents( $bg_image_src );
+	$mg_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_mg', true );
+	$mg_image_src = get_attached_file( $mg_image_id );
+	$mg_image = file_get_contents( $mg_image_src );
+	$trim_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_trim', true );
+	$trim_image_src = get_attachement_url( $trim_image_id );
+	$trim_side = get_post_meta( $section->id, 'cAc_wpsml_section_trim_side', true );
+	wp_nonce_field( 'cAc_wpsml_section_save_meta_box_fields', 'cAc_wpsml_section_save_meta_box_nonce' );
+	?>
+	<table>
+		<tbody>
+			<tr>
+				<td>
+					<h3><?php echo __( 'Background Layer', 'cAc_wpsml' ) ?></h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="cAc_wpsml_section_bg" ><?php echo $bg_image ?></img>
+					<input type="hidden" id="cAc_wpsml_section_bg" name="cAc_wpsml_section_bg" value="<?php echo $bg_image_id; ?>" />
+					<br/>
+					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_bg" title="Set Background Layer SVG file" href="set-bg-image">Set Background Image</a>
+					<br/>
+					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" style="display: none;" title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
+				</td>
+			</tr>
+			<?php } ?>
+			
+		</tbody>
+	</table>
+	<?php
+
+}	//end cAc_wpsml_section_meta_box_fields
+
+
+
+function cAc_wpsml_section_save_meta_box_fields( $section_id ) {
+
+	//check security
+	if ( ! isset( $_POST['cAc_wpsml_section_save_meta_box_nonce'] ) ) {
+	
+    	return $section_id;
+    
+    }	//end if ( ! isset( $_POST['cAc_wpsml_section_save_meta_box_nonce'] ) )
+    $nonce = $_POST['cAc_wpsml_section_save_meta_box_nonce'];
+	if ( ! wp_verify_nonce( $nonce, 'cAc_wpsml_section_save_meta_box_fields' ) ) {
+	
+	  return $section_id;
+	
+	}	//end if ( ! wp_verify_nonce( $nonce, 'cAc_wpsml_section_save_meta_box_fields' ) )
+	
+	// If this is an autosave, our form has not been submitted, so we don't want to do anything.
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+	
+	  return $section_id;
+	
+	}	//end if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+	
+    	
+	//verify and sanitize values	
+	$bg = isset( $_POST['cAc_wpsml_section_bg'] ) ? $_POST['cAc_wpsml_section_bg'] : '';
+	
+	//save to db
+	update_post_meta( $section_id, 'cAc_wpsml_section_bg', $bg );
+
+}	//end cAc_wpsml_section_save_meta_box_fields
+add_action( 'save_post_cAcsmlsection', 'cAc_wpsml_section_save_meta_box_fields' );
 
 
 
@@ -131,7 +249,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
 
 	$html .= '<div class="cAc_wpsml-bg">';
-	$html .= '<div style="background: blue; height:768px; width: 100%;"></div>';
+	
 	$html .= '</div>';
 
 	$html .= '<div class="cAc_wpsml-mg">';
@@ -139,7 +257,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	$html .= '</div>';
 
 	$html .= '<div class="cAc_wpsml-content">';
-	$html .= apply_filters( 'the_content', $section->post_content  );
+	
 	$html .= '</div>';
 
 	$html .= '<div class="cAc_wpsml-media">';
@@ -168,6 +286,7 @@ function cAc_wpsml_load_section() {
 		$metas = get_post_meta( intval( $_POST['id'] ) );
 		$mediaurl = wp_get_attachment_url( get_post_thumbnail_id( intval( $_POST['id'] ), 'thumbnail') );
 		
+		
 		if( $_POST['bg'] ) {
 		
 			$response['bg'] = $metas['cAc_wpsml_section_bg'];
@@ -190,11 +309,20 @@ function cAc_wpsml_load_section() {
 		}
 		if( $_POST['trim'] ) {
 		
-			$response['trim'] = $metas['cAc_wpsml_section_trim'];
+			$response['trim'] = '<div class="cAc_wpsml_trim-' . $metas['cAc_wpsml_section_trim_side'] . '">' . $metas['cAc_wpsml_section_trim'] . '</div>';
 		
 		}
 	
 	}
 	echo json_encode( $response );
 	die();
-}
+}	//end cAc_wpsml_load_section()
+
+
+function cAc_wpsml_mime_types( $mimes ) {
+
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+
+}	//end cAc_wpsml_mime_types( $mimes )
+add_filter( 'upload_mimes', 'cAc_wpsml_mime_types' );
