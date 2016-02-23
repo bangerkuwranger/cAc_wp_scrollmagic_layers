@@ -1,6 +1,6 @@
 var controller,
-tweens{},
-scenes{};
+tweens = {},
+scenes = {};
 
 $(function() {
 	
