@@ -4,6 +4,7 @@ scenes = {};
 
 jQuery(function($) {
 	
+	controller = new ScrollMagic();
 	$('.cAc_wpsml-pageSection').each( function() {
 	
 		var thisId = $(this).attr('id'),
@@ -31,10 +32,7 @@ jQuery(function($) {
 		// show indicators (requires debug extension)
 		scenes[thisId].addIndicators();
 		
-	
 	});	//end $('.cAc_wpsml-pageSection').each( function()
-	
-	controller = new ScrollMagic();
 
 });	//end jQuery(function($)
 
