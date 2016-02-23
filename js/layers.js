@@ -23,13 +23,13 @@ jQuery(function($) {
 	
 		]);	//end new TimelineMax ()
 		
-		scene[thisId] = new ScrollScene({triggerElement: "#" + thisId, duration: 2000, offset: 450})
+		scenes[thisId] = new ScrollScene({triggerElement: "#" + thisId, duration: 2000, offset: 450})
 						.setTween(tweens[thisId])
 						.setPin("#" + thisId)
 						.addTo(controller);
 
 		// show indicators (requires debug extension)
-		scene[thisId].addIndicators();
+		scenes[thisId].addIndicators();
 		
 	
 	});	//end $('.cAc_wpsml-pageSection').each( function()
