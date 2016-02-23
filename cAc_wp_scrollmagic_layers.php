@@ -142,7 +142,7 @@ function cAc_wpsml_section_edit_form_after_editor() {
 
 function cAc_wpsml_section_meta_box() {
 
-	add_meta_box( 'cAc_wpsml_section_layer_data', 'Additional Layers', 'cAc_wpsml_section_meta_box_fields', array( 'cAcsmlsection' ), 'normal', 'core' )
+	add_meta_box( 'cAc_wpsml_section_layer_data', 'Additional Layers', 'cAc_wpsml_section_meta_box_fields', array( 'cAcsmlsection' ), 'normal', 'core' );
 
 }	//end cAc_wpsml_section_meta_box()
 
