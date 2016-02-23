@@ -24,9 +24,21 @@ jQuery(function($) {
 	
 		]);	//end new TimelineMax ()
 		
-		scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#" + thisId, duration: 2000, offset: 450})
-						.setTween(tweens[thisId])
-						.setPin("#" + thisId)
+		scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + ".cAc_wpsml-bg", duration: 1000, offset: 0})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + ".cAc_wpsml-bg")
+						.addTo(controller);
+		scenes[thisId + "mg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + ".cAc_wpsml-mg", duration: 2000, offset: 50})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + ".cAc_wpsml-mg")
+						.addTo(controller);
+		scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + ".cAc_wpsml-content", duration: 768, offset: 760})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + ".cAc_wpsml-content")
+						.addTo(controller);
+		scenes[thisId + "media"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + ".cAc_wpsml-media", duration: 200, offset: 0})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + ".cAc_wpsml-media")
 						.addTo(controller);
 
 		// show indicators (requires debug extension)
