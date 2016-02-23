@@ -2,7 +2,7 @@ var controller,
 tweens = {},
 scenes = {};
 
-$(function() {
+jQuery(function($) {
 	
 	$('.cAc_wpsml-pageSection').each( function() {
 	
@@ -36,7 +36,7 @@ $(function() {
 	
 	controller = new ScrollMagic();
 
-});	//end $(function()
+});	//end jQuery(function($)
 
 function sectionScene( id ) {
 
