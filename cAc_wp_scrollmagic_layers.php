@@ -34,7 +34,9 @@ function cAc_wpsml_frontend_queue() {
 	wp_enqueue_script( 'cAc_wpsml_scrollmagic_gsap', plugins_url( 'lib/scrollmagic/plugins/animation.gsap.js', __FILE__ ), array( 'jquery', 'cAc_wpsml_scrollmagic' ) );
 	wp_enqueue_script( 'cAc_wpsml_scrollmagic', plugins_url( 'lib/scrollmagic/ScrollMagic.js', __FILE__ ), array( 'jquery', 'cAc_wpsml_gsap_tweenmax', 'cAc_wpsml_gsap_timelinemax' ) );
 	wp_enqueue_script( 'cAc_wpsml_scrollmagic_debug', plugins_url( 'lib/scrollmagic/plugins/debug.addIndicators.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
-	wp_enqueue_script( 'cAc_wpsml_scrollmagic_layers', plugins_url( 'js/layers.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
+	wp_register_script( 'cAc_wpsml_scrollmagic_layers', plugins_url( 'js/layers.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
+	wp_localize_script( 'cAc_wpsml_scrollmagic_layers', 'cAc_wpsml_vars', array( 'baseUrl' => get_site_url() . '/', 'pluginUrl' => plugins_url( '/', __FILE__ ), 'handler' => plugins_url( '/admin-ajax.php', __FILE__ ) ) );
+	wp_enqueue_script( 'cAc_wpsml_scrollmagic_layers' );
 	wp_enqueue_style( 'cAc_wpsml_scrollmagic_layers', plugins_url( 'css/layers.css', __FILE__ ) );
 
 
@@ -112,44 +114,87 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	);
 
 	// Code
-if( $id == null ) {
+	if( $id == null ) {
 
-	return '';
+		return '';
 
-}	//end if( $id == null )
+	}	//end if( $id == null )
 
-$section = get_post( $id );
+	$section = get_post( $id );
 
-if( !$section ) {
+	if( !$section ) {
 
-	return '';
+		return '';
 
-}	//end if( !$section )
+	}	//end if( !$section )
 
-$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
+	$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
 
-$html .= '<div class="cAc_wpsml-bg">';
-$html .= '<div style="background: blue; height:768px; width: 100%;"></div>';
-$html .= '</div>';
+	$html .= '<div class="cAc_wpsml-bg">';
+	$html .= '<div style="background: blue; height:768px; width: 100%;"></div>';
+	$html .= '</div>';
 
-$html .= '<div class="cAc_wpsml-mg">';
+	$html .= '<div class="cAc_wpsml-mg">';
 
-$html .= '</div>';
+	$html .= '</div>';
 
-$html .= '<div class="cAc_wpsml-content">';
-$html .= apply_filters( 'the_content', $section->post_content  );
-$html .= '</div>';
+	$html .= '<div class="cAc_wpsml-content">';
+	$html .= apply_filters( 'the_content', $section->post_content  );
+	$html .= '</div>';
 
-$html .= '<div class="cAc_wpsml-media">';
-$html .= get_the_post_thumbnail( $section );
-$html .= '</div>';
+	$html .= '<div class="cAc_wpsml-media">';
+	$html .= get_the_post_thumbnail( $section );
+	$html .= '</div>';
 
-$html .= '<div class="cAc_wpsml-trim">';
+	$html .= '<div class="cAc_wpsml-trim">';
 
-$html .= '</div>';
+	$html .= '</div>';
 
-$html .= '</div>';
-return $html;
+	$html .= '</div>';
+	apply_filters( 'cAc_wpsml_render_page_section', $html );
+	return $html;
+
 }	//end cAc_wpsml_section_shortcode( $atts )
 add_shortcode( 'smpagesection', 'cAc_wpsml_section_shortcode' );
 
+add_action( 'wp_ajax_nopriv_cAc_wpsml_load_section', 'cAc_wpsml_load_section' );
+add_action( 'wp_ajax_cAc_wpsml_load_section', 'cAc_wpsml_load_section' );
+
+function cAc_wpsml_load_section() {
+
+	$response = array();
+	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+	
+		$metas = get_post_meta( invtal( $_POST['id'] ) );
+		$mediaurl = wp_get_attachment_url( get_post_thumbnail_id( intval( $_POST['id'] ), 'thumbnail') );
+		
+		if( $_POST['bg'] ) {
+		
+			$response['bg'] = $metas['cAc_wpsml_section_bg'];
+		
+		}
+		if( $_POST['mg'] ) {
+		
+			$response['mg'] = $metas['cAc_wpsml_section_mg'];
+		
+		}
+		if( $_POST['content'] ) {
+		
+			$response['content'] = apply_filters( 'the_content', get_post( intval( $_POST['id'] ) )->post_content );
+		
+		}
+		if( $_POST['media'] ) {
+		
+			$response['media'] = '<img src="' . $mediaurl . '" />';
+		
+		}
+		if( $_POST['trim'] ) {
+		
+			$response['trim'] = $metas['cAc_wpsml_section_trim'];
+		
+		}
+	
+	}
+	echo json_encode( $response );
+	die();
+}
