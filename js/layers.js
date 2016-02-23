@@ -16,11 +16,11 @@ jQuery(function($) {
 		
 		tweens[thisId] = new TimelineMax().add([
 	
-			TweenMax.to("#section-" + thisId + ".cAc_wpsml-bg", 1, {top: "-40%", ease: Linear.easeNone}),
-			TweenMax.to("#section-" + thisId + ".cAc_wpsml-mg", 1, {top: "-50%", ease: Linear.easeNone}),
-			TweenMax.to("#section-" + thisId + ".cAc_wpsml-content", 1, {top: "-25%", ease: Linear.easeNone}),
-			TweenMax.to("#section-" + thisId + ".cAc_wpsml-media", 1, {top: "-60%", ease: Linear.easeNone}),
-			TweenMax.to("#section-" + thisId + ".cAc_wpsml-trim", 1, {top: "-80%", ease: Linear.easeNone})
+			TweenMax.to("#section-" + thisId + ".cAc_wpsml-bg", 1000, {top: "-40%", ease: Linear.easeNone}),
+			TweenMax.to("#section-" + thisId + ".cAc_wpsml-mg", 1200, {top: "-50%", ease: Linear.easeNone}),
+			TweenMax.to("#section-" + thisId + ".cAc_wpsml-content", 768, {top: "-25%", ease: Linear.easeNone}),
+			TweenMax.to("#section-" + thisId + ".cAc_wpsml-media", 300, {top: "-60%", ease: Linear.easeNone}),
+			TweenMax.to("#section-" + thisId + ".cAc_wpsml-trim", 250, {top: "-80%", ease: Linear.easeNone})
 	
 		]);	//end new TimelineMax ()
 		
