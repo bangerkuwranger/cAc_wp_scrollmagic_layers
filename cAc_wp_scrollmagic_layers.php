@@ -156,7 +156,7 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 	$mg_image_src = get_attached_file( $mg_image_id );
 	$mg_image = file_get_contents( $mg_image_src );
 	$trim_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_trim', true );
-	$trim_image_src = get_attachement_url( $trim_image_id );
+	$trim_image_src = wp_get_attachment_url( $trim_image_id );
 	$trim_side = get_post_meta( $section->id, 'cAc_wpsml_section_trim_side', true );
 	wp_nonce_field( 'cAc_wpsml_section_save_meta_box_fields', 'cAc_wpsml_section_save_meta_box_nonce' );
 	?>
