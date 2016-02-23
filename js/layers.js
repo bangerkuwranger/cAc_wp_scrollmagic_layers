@@ -195,7 +195,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 							'content':	toFetch.content,
 							'media':	toFetch.media,
 							'trim':		toFetch.trim,
-				}
+				},
 				success: 	function(response) {
 				
 					console.log( JSON.parse( response ) );
