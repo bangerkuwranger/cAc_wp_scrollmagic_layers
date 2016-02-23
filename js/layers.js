@@ -23,7 +23,7 @@ jQuery(function($) {
 	
 		]);	//end new TimelineMax ()
 		
-		scenes[thisId] = new ScrollScene({triggerElement: "#" + thisId, duration: 2000, offset: 450})
+		scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#" + thisId, duration: 2000, offset: 450})
 						.setTween(tweens[thisId])
 						.setPin("#" + thisId)
 						.addTo(controller);
