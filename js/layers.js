@@ -183,7 +183,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 		}
 		else {
 			
-			$.ajax({
+			jQuery.ajax({
 			
 				url:		cAc_wpsml_vars.handler,
 				type: 		'post',
