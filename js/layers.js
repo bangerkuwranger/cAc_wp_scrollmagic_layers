@@ -26,42 +26,42 @@ jQuery(function($) {
 			var bg = $bg;
 		}
 		else {
-			var bg = null;
+			var bg = false;
 		}
 		
 		if( $mg.length() > 0 ) {
 			var mg = $mg;
 		}
 		else {
-			var mg = null;
+			var mg = false;
 		}
 		
 		if( $content.length() > 0 ) {
 			var content = $content;
 		}
 		else {
-			var content = null;
+			var content = false;
 		}
 		
 		if( $media.length() > 0 ) {
 			var media = $media;
 		}
 		else {
-			var media = null;
+			var media = false;
 		}
 		
 		if( $trim.length() > 0 ) {
 			var trim = $trim;
 		}
 		else {
-			var trim = null;
+			var trim = false;
 		}
 		
 		loadSectionScene( thisId, bg, mg, content, media, trim );
 		
 		//tweens & scenes (tweens currently commented out)
 	
-		if( bg != null ) {
+		if( bg != false ) {
 			tweens[thisId + "bg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-bg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 500, offset: 0})
 						// .setTween(tweens[thisId])
@@ -71,7 +71,7 @@ jQuery(function($) {
 			scenes[thisId + "bg"].addIndicators();
 		}
 		
-		if( mg != null ) {
+		if( mg != false ) {
 			tweens[thisId + "mg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-mg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "mg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-mg", duration: 500, offset: 0})
 						// .setTween(tweens[thisId])
@@ -81,7 +81,7 @@ jQuery(function($) {
 			scenes[thisId + "mg"].addIndicators();
 		}
 		
-		if( content != null ) {
+		if( content != false ) {
 			tweens[thisId + "content"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-content", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-content", duration: 500, offset: 0})
 						// .setTween(tweens[thisId])
@@ -91,7 +91,7 @@ jQuery(function($) {
 			scenes[thisId + "content"].addIndicators();
 		}
 		
-		if( media != null ) {
+		if( media != false ) {
 			tweens[thisId + "media"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-media", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "media"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-media", duration: 500, offset: 0})
 						// .setTween(tweens[thisId])
@@ -101,7 +101,7 @@ jQuery(function($) {
 			scenes[thisId + "media"].addIndicators();
 		}
 		
-		if( trim != null ) {
+		if( trim != false ) {
 			tweens[thisId + "trim"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-trim", 1000, {top: "-40%", ease: Linear.easeNone}) ]);
 			scenes[thisId + "trim"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-trim", duration: 2000, offset: 0})
 						// .setTween(tweens[thisId])
@@ -116,7 +116,7 @@ jQuery(function($) {
 });	//end jQuery(function($)
 
 //load the content for each scene based on viewport width and whether content exists (existence determined in shortcode)
-function loadSectionScene( id, bg = null, mg = null, content = null, media = null, trim = null ) {
+function loadSectionScene( id, bg, mg, content, media, trim ) {
 
 	if (!id) {
 		return false;
@@ -142,7 +142,7 @@ function loadSectionScene( id, bg = null, mg = null, content = null, media = nul
 	var faLoader = '<div class="loading-content"><i class="fa fa-circle-o-notch fa-spin"></i></div>';
 	
 	//don't fetch empty bg
-	if (bg == null) {
+	if (bg) {
 		toFetch.bg = false;
 	}
 	else {
@@ -150,13 +150,13 @@ function loadSectionScene( id, bg = null, mg = null, content = null, media = nul
 	}
 	
 	//only fetch midground if exists and above small breakpoint
-	if (mg != null && cAc_wpsmlViewport.width > breakpoints.sm) {
+	if (mg != false && cAc_wpsmlViewport.width > breakpoints.sm) {
 		toFetch.mg = true;
 		mg.append(faLoader);
 	}
 	
 	//don't fetch empty content
-	if (content == null) {
+	if (content == false) {
 		toFetch.content = false;
 	}
 	else {
@@ -164,20 +164,20 @@ function loadSectionScene( id, bg = null, mg = null, content = null, media = nul
 	}
 	
 	//only fetch media if exists and above medium breakpoint
-	if (media != null && cAc_wpsmlViewport.width > breakpoints.md) {
+	if (media != false && cAc_wpsmlViewport.width > breakpoints.md) {
 		toFetch.media = true;
 		media.append(faLoader);
 	}
 	
 	//only fetch trim if exists and above large breakpoint
-	if (trim != null && cAc_wpsmlViewport.width > breakpoints.lg) {
+	if (trim != false && cAc_wpsmlViewport.width > breakpoints.lg) {
 		toFetch.trim = true;
 		trim.append(faLoader);
 	}
 	
 	if (typeof 'cAc_wpsml_vars' != 'undefined') {
 	
-		if (cac_wpsml_vars.handler == null) {
+		if (cac_wpsml_vars.handler == false) {
 			$('.loading-content').remove();
 			return false;
 		}
