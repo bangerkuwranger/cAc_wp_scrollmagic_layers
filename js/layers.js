@@ -175,17 +175,17 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 		trim.append(faLoader);
 	}
 	
-	if (typeof 'cAc_wpsml_vars' != 'undefined') {
+	if (typeof 'cAc_wpsml_vars' != undefined) {
 	
-		if (cac_wpsml_vars.handler == false) {
+		if (cAc_wpsml_vars.handler == false) {
 			$('.loading-content').remove();
 			return false;
 		}
 		else {
-		
+			
 			$.ajax({
 			
-				url:		cac_wpsml_vars.handler,
+				url:		cAc_wpsml_vars.handler,
 				type: 		'post',
 				data:		{
 							'action':	'cAc_wpsml_load_section',
