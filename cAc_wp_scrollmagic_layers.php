@@ -33,6 +33,8 @@ function cAc_wpsml_frontend_queue() {
 	wp_enqueue_script( 'cAc_wpsml_gsap_timelinemax', plugins_url( 'lib/gsap/TimelineMax.js', __FILE__ ) );
 	wp_enqueue_script( 'cAc_wpsml_scrollmagic', plugins_url( 'lib/scrollmagic/ScrollMagic.js', __FILE__ ), array( 'jquery', 'cAc_wpsml_gsap_tweenmax', 'cAc_wpsml_gsap_timelinemax' ) );
 	wp_enqueue_script( 'cAc_wpsml_scrollmagic_debug', plugins_url( 'lib/scrollmagic/plugins/debug.addIndicators.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
+	wp_enqueue_script( 'cAc_wpsml_scrollmagic_layers', plugins_url( 'js/layers.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
+	wp_enqueue_style( 'cAc_wpsml_scrollmagic_layers', plugins_url( 'css/layers.css', __FILE__ ) );
 
 
 }	//end cAc_wpsml_frontend_queue()
@@ -123,7 +125,7 @@ if( !$section ) {
 
 }	//end if( !$section )
 
-$html = '<div class="cAc_wpsml-pageSection sectionID-' . $id .'">';
+$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
 
 $html .= '<div class="cAc_wpsml-bg">';
 $html .= '<div style="background: blue; height:768px; width: 100%;"></div>';
