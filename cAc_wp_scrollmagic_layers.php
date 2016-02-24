@@ -175,7 +175,7 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 					<br/>
 					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_bg" title="Set Background Layer SVG file" href="set-bg-image">Set Background Image</a>
 					<br/>
-					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" <?php echo empty( $bg_image_id ) ? '' :'style="display: none;"' ?> title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
+					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" <?php echo empty( $bg_image_id ) ? 'style="display: none;"' : '' ?> title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
 				</td>
 			</tr>
 		</tbody>
