@@ -294,6 +294,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	}	//end if( $id == null )
 
 	$section = get_post( $id );
+	$meta = get_post_meta( $id );
 
 	if( !$section ) {
 
@@ -301,28 +302,34 @@ function cAc_wpsml_section_shortcode( $atts ) {
 
 	}	//end if( !$section )
 
+	)
 	$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
 
-	$html .= '<div class="cAc_wpsml-bg">';
+	if( !empty( $metas['cAc_wpsml_section_bg'] ) ) {
+		$html .= '<div class="cAc_wpsml-bg">';
+		$html .= '</div>';
+	}
 	
-	$html .= '</div>';
+	if( !empty( $metas['cAc_wpsml_section_mg'] ) ) {
+		$html .= '<div class="cAc_wpsml-mg">';
+		$html .= '</div>';
+	}
 
-	$html .= '<div class="cAc_wpsml-mg">';
+	if( !empty( $section->post_content ) ) {
+		$html .= '<div class="cAc_wpsml-content">';
+		$html .= '</div>';
+	}
 
-	$html .= '</div>';
+	if( has_post_thumbnail( $section ) ) {
+		$html .= '<div class="cAc_wpsml-media">';
+		$html .= '</div>';
+	}
 
-	$html .= '<div class="cAc_wpsml-content">';
+	if( !empty( $metas['cAc_wpsml_section_trim'] ) ) {
+		$html .= '<div class="cAc_wpsml-trim">';
+		$html .= '</div>';
+	}
 	
-	$html .= '</div>';
-
-	$html .= '<div class="cAc_wpsml-media">';
-	$html .= get_the_post_thumbnail( $section );
-	$html .= '</div>';
-
-	$html .= '<div class="cAc_wpsml-trim">';
-
-	$html .= '</div>';
-
 	$html .= '</div>';
 	apply_filters( 'cAc_wpsml_render_page_section', $html );
 	return $html;
@@ -349,7 +356,7 @@ function cAc_wpsml_load_section() {
 		}
 		if( $_POST['mg'] ) {
 		
-			$response['mg'] = $metas['cAc_wpsml_section_mg'];
+			$response['mg'] = file_get_contents( get_attached_file( $metas['cAc_wpsml_section_mg'][0] ) );
 		
 		}
 		if( $_POST['content'] ) {
@@ -364,7 +371,7 @@ function cAc_wpsml_load_section() {
 		}
 		if( $_POST['trim'] ) {
 		
-			$response['trim'] = '<div class="cAc_wpsml_trim-' . $metas['cAc_wpsml_section_trim_side'] . '">' . $metas['cAc_wpsml_section_trim'] . '</div>';
+			$response['trim'] = '<div class="cAc_wpsml_trim-' . $metas['cAc_wpsml_section_trim_side'] . '">' . '<img src="' . $metas['cAc_wpsml_section_trim'] . '" />' . '</div>';
 		
 		}
 	
