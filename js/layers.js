@@ -49,17 +49,17 @@ jQuery(function($) {
 	
 		
 		var thisId = $(this).attr('id'),
-		$bg = $(this).hasClass('cAc_wpsml-bg'),
+		bg = $(this).hasClass('cAc_wpsml-bg'),
 		$mg = $(this).find('.cAc_wpsml-mg'),
 		$content = $(this).find('.cAc_wpsml-content'),
 		$media = $(this).find('.cAc_wpsml-media'),
 		$trim = $(this).find('.cAc_wpsml-trim');
 		
-		if( $bg.length > 0 ) {
-			var bg = $(this);
+		if (bg) {
+			var $bg = $(this);
 		}
 		else {
-			var bg = false;
+			var $bg = false;
 		}
 		
 		if( $mg.length > 0 ) {
