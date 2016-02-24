@@ -149,15 +149,15 @@ function cAc_wpsml_section_meta_box() {
 
 function cAc_wpsml_section_meta_box_fields( $section ) {
 
-	$bg_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_bg', true );
-	$bg_image_src = get_attached_file( $bg_image_id );
-	$bg_image = file_get_contents( $bg_image_src );
-	$mg_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_mg', true );
-	$mg_image_src = get_attached_file( $mg_image_id );
-	$mg_image = file_get_contents( $mg_image_src );
-	$trim_image_id = get_post_meta( $section->id, 'cAc_wpsml_section_trim', true );
+	$bg_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_bg', true );
+	$bg_image_src = wp_get_attachment_url( $bg_image_id );
+// 	$bg_image = file_get_contents( $bg_image_src );
+	$mg_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_mg', true );
+	$mg_image_src = wp_get_attachment_url( $mg_image_id );
+// 	$mg_image = file_get_contents( $mg_image_src );
+	$trim_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_trim', true );
 	$trim_image_src = wp_get_attachment_url( $trim_image_id );
-	$trim_side = get_post_meta( $section->id, 'cAc_wpsml_section_trim_side', true );
+	$trim_side = get_post_meta( $section->ID, 'cAc_wpsml_section_trim_side', true );
 	echo '<script>var cAcPageSectionId = "' . $section->ID . '";</script>';
 	wp_nonce_field( 'cAc_wpsml_section_save_meta_box_fields', 'cAc_wpsml_section_save_meta_box_nonce' );
 	?>
@@ -175,7 +175,7 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 					<br/>
 					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_bg" title="Set Background Layer SVG file" href="set-bg-image">Set Background Image</a>
 					<br/>
-					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" style="display: none;" title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
+					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" <?php echo empty( $bg_image_id ) ? '' :'style="display: none;"' ?> title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
 				</td>
 			</tr>
 		</tbody>
