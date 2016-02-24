@@ -9,6 +9,39 @@ breakpoints = {
 	'xl':	1400
 };
 
+function triangle( w, side, pos ) {
+
+	var h = Math.round((5*w)/24);
+	var which = side + pos;
+	var elem = '<div class="triangle ' + pos + '" style="min-height: ' + h + '; background-image: url(data:image/svg+xml;utf8,';
+	var svg = '<svg height="' + h + '" width="' + w + '">';
+	
+	switch (which) {
+	
+		case 'righttop':
+			svg += '<polygon points="0,0 ' + w + ',0 ' + w + ',' + h + '" style="fill:white;" />';
+			break;
+		case 'rightbottom':
+			svg += '<polygon points="' + w + ',0 ' + w + ',' + h + ' 0,' + h + '" style="fill:white;" />';
+			break;
+		case 'lefttop':
+			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',0" style="fill:white;" />';
+			break;
+		case 'leftbottom':
+			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',' + h + '" style="fill:white;" />';
+			break;
+		default:
+			return false;
+	
+	}
+	
+	elem += encodeURIComponent(svg);
+	elem += ')"></div>';
+	
+	return elem;
+
+}
+
 jQuery(function($) {
 	
 	controller = new ScrollMagic.Controller();
@@ -16,14 +49,14 @@ jQuery(function($) {
 	
 		
 		var thisId = $(this).attr('id'),
-		$bg = $(this).find('.cAc_wpsml-bg'),
+		$bg = $(this).hasClass('.cAc_wpsml-bg'),
 		$mg = $(this).find('.cAc_wpsml-mg'),
 		$content = $(this).find('.cAc_wpsml-content'),
 		$media = $(this).find('.cAc_wpsml-media'),
 		$trim = $(this).find('.cAc_wpsml-trim');
 		
 		if( $bg.length > 0 ) {
-			var bg = $bg;
+			var bg = $(this);
 		}
 		else {
 			var bg = false;
@@ -201,7 +234,8 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				
 					var responseObj = JSON.parse( response );
 					if( toFetch.bg ) {
-						bg.css( 'backgroundImage', responseObj.bg );
+						bg.prepend( triangle( cAc_wpsmlViewport.width, responseObj.bg, 'top' ) );
+						bg.append( triangle( cAc_wpsmlViewport.width, responseObj.bg, 'bottom' ) );
 					}
 					if( toFetch.mg ) {
 						mg.append( responseObj.mg );

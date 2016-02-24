@@ -149,8 +149,8 @@ function cAc_wpsml_section_meta_box() {
 
 function cAc_wpsml_section_meta_box_fields( $section ) {
 
-	$bg_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_bg', true );
-	$bg_image_src = wp_get_attachment_url( $bg_image_id );
+	$bg_side = get_post_meta( $section->ID, 'cAc_wpsml_section_bg_side', true );
+	$bg_color = get_post_meta( $section->ID, 'cAc_wpsml_section_bg_color', true );
 	$mg_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_mg', true );
 	$mg_image_src = wp_get_attachment_url( $mg_image_id );
 	$trim_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_trim', true );
@@ -171,12 +171,17 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 			</tr>
 			<tr>
 				<td>
-					<img style="width: 100%; height: auto;" class="cAc_wpsml_section_bg" src="<?php echo $bg_image_src; ?>"/>
-					<input type="hidden" id="cAc_wpsml_section_bg" name="cAc_wpsml_section_bg" value="<?php echo $bg_image_id; ?>" />
-					<br/>
-					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_bg" title="Set Background Layer SVG file" href="set-bg-image">Set Background Image</a>
-					<br/>
-					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" <?php echo empty( $bg_image_id ) ? 'style="display: none;"' : '' ?> title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
+					<label for="cAc_wpsml_section_bg_color">Which color should the background be?</label><br/>
+					<select name="cAc_wpsml_section_bg_color">
+						<option value="gray" <?php selected( 'gray', $bg_color ); ?> >Gray</option>
+						<option value="lilac" <?php selected( 'lilac', $bg_color ); ?> >Lilac</option>
+						<option value="pink" <?php selected( 'pink', $bg_color ); ?> >Pink</option>
+						<option value="teal" <?php selected( 'teal', $bg_color ); ?> >Teal</option>
+						<option value="yellow" <?php selected( 'yellow', $bg_color ); ?> >Yellow</option>
+					</select>
+					<label for="cAc_wpsml_section_bg_side">Which side of the background should be shorter?</label><br/>
+					<input name="cAc_wpsml_section_bg_side" id="cAc_wpsml_section_bg_side_left" value="left" type="radio" <?php checked( 'left', $bg_side ); ?> /> Left<br/>
+					<input name="cAc_wpsml_section_bg_side" id="cAc_wpsml_section_bg_side_right" value="right" type="radio" <?php checked( 'right', $bg_side ); ?> /> Right
 				</td>
 			</tr>
 			<tr>
@@ -263,13 +268,15 @@ function cAc_wpsml_section_save_meta_box_fields( $section_id ) {
 	
     	
 	//verify and sanitize values	
-	$bg = isset( $_POST['cAc_wpsml_section_bg'] ) ? $_POST['cAc_wpsml_section_bg'] : '';
+	$bg_color = isset( $_POST['cAc_wpsml_section_bg_color'] ) ? $_POST['cAc_wpsml_section_bg_color'] : '';
+	$bg_side = isset( $_POST['cAc_wpsml_section_bg_side'] ) ? $_POST['cAc_wpsml_section_bg_side'] : '';
 	$mg = isset( $_POST['cAc_wpsml_section_mg'] ) ? $_POST['cAc_wpsml_section_mg'] : '';
 	$trim = isset( $_POST['cAc_wpsml_section_trim'] ) ? $_POST['cAc_wpsml_section_trim'] : '';
 	$trim_side = isset( $_POST['cAc_wpsml_section_trim_side'] ) ? $_POST['cAc_wpsml_section_trim_side'] : '';
 	
 	//save to db
-	update_post_meta( $section_id, 'cAc_wpsml_section_bg', $bg );
+	update_post_meta( $section_id, 'cAc_wpsml_section_bg_color', $bg_color );
+	update_post_meta( $section_id, 'cAc_wpsml_section_bg_side', $bg_side );
 	update_post_meta( $section_id, 'cAc_wpsml_section_mg', $mg );
 	update_post_meta( $section_id, 'cAc_wpsml_section_trim', $trim );
 	update_post_meta( $section_id, 'cAc_wpsml_section_trim_side', $trim_side );
@@ -306,11 +313,13 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	}	//end if( !$section )
 
 	
-	$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
+	$html = '<div id="section-' . $id .'" class="cAc_wpsml-pageSection';
 
-	if( !empty( $meta['cAc_wpsml_section_bg'] ) ) {
-		$html .= '<div class="cAc_wpsml-bg">';
-		$html .= '</div>';
+	if( !empty( $meta['cAc_wpsml_section_bg_color'] ) && !empty( $meta['cAc_wpsml_section_bg_side'] )) {
+		$html .= ' cAc_wpsml-bg ' . $meta['cAc_wpsml_section_bg_color'] . ' ' . $meta['cAc_wpsml_section_bg_side'] . '">';
+	}
+	else {
+		$html .= '">';
 	}
 	
 	if( !empty( $meta['cAc_wpsml_section_mg'] ) ) {
@@ -355,7 +364,7 @@ function cAc_wpsml_load_section() {
 		
 		if( $_POST['bg'] === "true" ) {
 		
-			$response['bg'] = "url('" . file_get_contents( get_attached_file( $metas['cAc_wpsml_section_bg'][0] ) ) . "')";
+			$response['bg'] = $metas['cAc_wpsml_section_bg_side'];
 		
 		}
 		if( $_POST['mg'] === "true" ) {

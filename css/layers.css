@@ -1,6 +1,21 @@
 .cAc_wpsml-pageSection {
 	min-height: 320px;
 	background-color: #ccc;
+	position: relative;
+}
+
+.cAc_wpsml-pageSection div.triangle {
+	position: absolute;
+	width: 100%; 
+	height: auto;
+}
+
+.cAc_wpsml-pageSection div.top {
+	top: 0;
+}
+
+.cAc_wpsml-pageSection div.bottom {
+	bottom: 0;
 }
 
 .cAc_wpsml-pageSection div[class^='.cAc_wpsml-'] {
