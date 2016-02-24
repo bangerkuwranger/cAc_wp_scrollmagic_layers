@@ -198,7 +198,11 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				},
 				success: 	function(response) {
 				
-					console.log( JSON.parse( response ) );
+					var responseObj = JSON.parse( response );
+					if( toFetch.bg ) {
+						bg.append( responseObj.bg );
+					}
+					console.log( responseObj );
 					jQuery('#' + id + ' .loading-content').fadeOut();
 					jQuery('#' + id + ' .loading-content').remove();
 				}
