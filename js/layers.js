@@ -125,6 +125,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	if (typeof 'cAc_wpsmlViewport' == 'undefined') {
 		var cAc_wpsmlViewport;
 	}
+
 	
 	if (cAc_wpsmlViewport == null || cAc_wpsmlViewport == '') {
 		var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;
