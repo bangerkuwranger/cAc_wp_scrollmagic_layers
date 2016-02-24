@@ -209,6 +209,9 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 					if( toFetch.content ) {
 						content.html( responseObj.content );
 					}
+					if( toFetch.bg ) {
+						bg.css( 'background-image', responseObj.bg );
+					}
 					console.log( responseObj );
 					jQuery('#' + id + ' .loading-content').fadeOut();
 					jQuery('#' + id + ' .loading-content').remove();

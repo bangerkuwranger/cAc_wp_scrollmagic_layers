@@ -2,7 +2,7 @@
 	min-height: 320px;
 }
 
-.cAc_wpsml-pageSection > div {
+.cAc_wpsml-pageSection div[class^='.cAc_wpsml-'] {
 	position: relative;
 	min-height: 320px;
 	height: 100%;
