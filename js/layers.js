@@ -201,7 +201,13 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				
 					var responseObj = JSON.parse( response );
 					if( toFetch.bg ) {
-						bg.css( 'background', responseObj.bg );
+						bg.css( 'background-image', responseObj.bg );
+					}
+					if( toFetch.mg ) {
+						mg.html( responseObj,mg );
+					}
+					if( toFetch.content ) {
+						content.html( responseObj.content );
 					}
 					console.log( responseObj );
 					jQuery('#' + id + ' .loading-content').fadeOut();
