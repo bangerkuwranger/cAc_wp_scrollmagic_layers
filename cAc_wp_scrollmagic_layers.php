@@ -101,7 +101,7 @@ if( ! function_exists('cAc_wpsml_section') ) {
 			'publicly_queryable'    => true,
 			'capability_type'       => 'page',
 		);
-		register_post_type( 'cAcsmlsection', $args );
+		register_post_type( 'cacsmlsection', $args );
 
 	}	//end cAc_wpsml_section()
 	add_action( 'init', 'cAc_wpsml_section', 0 );
@@ -117,11 +117,11 @@ function cAc_wpsml_section_edit_form_after_title() {
 
 	$screen = get_current_screen();
 	
-	if( $screen->post_type == 'cAcsmlsection' ) {
+	if( $screen->post_type == 'cacsmlsection' ) {
 	
 		echo '<div class="postbox" style="margin-top: 20px;"><h2>Content Layer</h2><div class="inside">';
 	
-	}	//end if( $screen->post_type == 'cAcsmlsection' )
+	}	//end if( $screen->post_type == 'cacsmlsection' )
 	
 }	//end cAc_wpsml_section_edit_form_after_title()
 
@@ -129,11 +129,11 @@ function cAc_wpsml_section_edit_form_after_editor() {
 
 	$screen = get_current_screen();
 	
-	if( $screen->post_type == 'cAcsmlsection' ) {
+	if( $screen->post_type == 'cacsmlsection' ) {
 	
 		echo '</div></div>';
 	
-	}	//end if( $screen->post_type == 'sundial_collection' || $screen->post_type == 'sundial_product' )
+	}	//end if( $screen->post_type == 'cacsmlsection' )
 	
 }	//end cAc_wpsml_section_edit_form_after_editor()
 
@@ -142,7 +142,7 @@ function cAc_wpsml_section_edit_form_after_editor() {
 
 function cAc_wpsml_section_meta_box() {
 
-	add_meta_box( 'cAc_wpsml_section_layer_data', 'Additional Layers', 'cAc_wpsml_section_meta_box_fields', array( 'cAcsmlsection' ), 'normal', 'core' );
+	add_meta_box( 'cAc_wpsml_section_layer_data', 'Additional Layers', 'cAc_wpsml_section_meta_box_fields', array( 'cacsmlsection' ), 'normal', 'core' );
 
 }	//end cAc_wpsml_section_meta_box()
 
@@ -216,7 +216,7 @@ function cAc_wpsml_section_save_meta_box_fields( $section_id ) {
 	update_post_meta( $section_id, 'cAc_wpsml_section_bg', $bg );
 
 }	//end cAc_wpsml_section_save_meta_box_fields
-add_action( 'save_post_cAcsmlsection', 'cAc_wpsml_section_save_meta_box_fields' );
+add_action( 'save_post_cacsmlsection', 'cAc_wpsml_section_save_meta_box_fields' );
 
 
 
