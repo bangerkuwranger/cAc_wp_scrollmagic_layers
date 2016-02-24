@@ -50,7 +50,7 @@ jQuery(function() {
 			fieldID = jQuery(this).attr('id');
 			fieldID = fieldID.replace('remove-', '');
 			jQuery('#' + fieldID).val('');
-			jQuery('img.' + fieldID).src('');
+			jQuery('img.' + fieldID).attr('src','');
 			jQuery(this).hide();
 			return false;
  
