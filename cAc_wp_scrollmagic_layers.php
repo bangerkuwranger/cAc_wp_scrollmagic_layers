@@ -316,7 +316,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	$html = '<div id="section-' . $id .'" class="cAc_wpsml-pageSection';
 
 	if( !empty( $meta['cAc_wpsml_section_bg_color'] ) && !empty( $meta['cAc_wpsml_section_bg_side'] )) {
-		$html .= ' cAc_wpsml-bg ' . $meta['cAc_wpsml_section_bg_color'] . ' ' . $meta['cAc_wpsml_section_bg_side'] . '">';
+		$html .= ' cAc_wpsml-bg ' . $meta['cAc_wpsml_section_bg_color'][0] . ' ' . $meta['cAc_wpsml_section_bg_side'][0] . '">';
 	}
 	else {
 		$html .= '">';
