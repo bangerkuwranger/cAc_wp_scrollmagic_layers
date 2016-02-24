@@ -61,7 +61,7 @@ jQuery(function($) {
 		
 		//tweens & scenes (tweens currently commented out)
 	
-		if( bg != false ) {
+	/*	if( bg != false ) {
 			tweens[thisId + "bg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-bg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 500, offset: 0})
 						// .setTween(tweens[thisId])
@@ -110,7 +110,7 @@ jQuery(function($) {
 			// show indicators (requires debug extension)
 			scenes[thisId + "trim"].addIndicators();
 		}
-		
+		*/
 	});	//end $('.cAc_wpsml-pageSection').each( function()
 
 });	//end jQuery(function($)
