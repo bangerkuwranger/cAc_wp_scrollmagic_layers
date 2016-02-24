@@ -201,7 +201,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				
 					var responseObj = JSON.parse( response );
 					if( toFetch.bg ) {
-						bg.append( responseObj.bg );
+						bg.css( 'background', responseObj.bg );
 					}
 					console.log( responseObj );
 					jQuery('#' + id + ' .loading-content').fadeOut();

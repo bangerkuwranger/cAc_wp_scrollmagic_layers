@@ -355,7 +355,7 @@ function cAc_wpsml_load_section() {
 		
 		if( $_POST['bg'] === "true" ) {
 		
-			$response['bg'] = file_get_contents( get_attached_file( $metas['cAc_wpsml_section_bg'][0] ) );
+			$response['bg'] = "url('" . file_get_contents( get_attached_file( $metas['cAc_wpsml_section_bg'][0] ) ) . "')";
 		
 		}
 		if( $_POST['mg'] === "true" ) {
