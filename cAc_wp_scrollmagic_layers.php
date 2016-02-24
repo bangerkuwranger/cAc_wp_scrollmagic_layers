@@ -159,6 +159,9 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 	echo '<script>var cAcPageSectionId = "' . $section->ID . '";</script>';
 	wp_nonce_field( 'cAc_wpsml_section_save_meta_box_fields', 'cAc_wpsml_section_save_meta_box_nonce' );
 	?>
+	<h2>Copy the code below and paste into page where you want this section to appear:<br/>
+		<code>[smpagesection id="<?php echo intval( $section->ID ); ?>"]</code>
+	</h2>
 	<table>
 		<tbody>
 			<tr>
@@ -302,7 +305,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 
 	}	//end if( !$section )
 
-	)
+	
 	$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
 
 	if( !empty( $metas['cAc_wpsml_section_bg'] ) ) {
