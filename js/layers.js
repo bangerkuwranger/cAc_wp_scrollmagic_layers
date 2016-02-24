@@ -143,24 +143,24 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	
 	//don't fetch empty bg
 	if (bg) {
-		toFetch.bg = false;
+		bg.append(faLoader);
 	}
 	else {
-		bg.append(faLoader);
+		toFetch.bg = false;
 	}
 	
 	//only fetch midground if exists and above small breakpoint
-	if (mg != false && cAc_wpsmlViewport.width > breakpoints.sm) {
+	if (mg && cAc_wpsmlViewport.width > breakpoints.sm) {
 		toFetch.mg = true;
 		mg.append(faLoader);
 	}
 	
 	//don't fetch empty content
-	if (content == false) {
-		toFetch.content = false;
+	if (content) {
+		content.append(faLoader);
 	}
 	else {
-		content.append(faLoader);
+		toFetch.content = false;
 	}
 	
 	//only fetch media if exists and above medium breakpoint
@@ -170,7 +170,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	}
 	
 	//only fetch trim if exists and above large breakpoint
-	if (trim != false && cAc_wpsmlViewport.width > breakpoints.lg) {
+	if (trim && cAc_wpsmlViewport.width > breakpoints.lg) {
 		toFetch.trim = true;
 		trim.append(faLoader);
 	}
