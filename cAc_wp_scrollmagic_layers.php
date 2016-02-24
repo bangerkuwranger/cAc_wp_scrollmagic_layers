@@ -85,7 +85,7 @@ if( ! function_exists('cAc_wpsml_section') ) {
 			'label'                 => __( 'Layered Page Section', 'cAc_wpsml' ),
 			'description'           => __( 'A layered section to be added to a page via shortcode', 'cAc_wpsml' ),
 			'labels'                => $labels,
-			'supports'              => array( 'title', 'editor', 'thumbnail', ),
+			'supports'              => array( 'editor', 'thumbnail', ),
 			'hierarchical'          => false,
 			'public'                => true,
 			'show_ui'               => true,
@@ -151,10 +151,8 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 
 	$bg_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_bg', true );
 	$bg_image_src = wp_get_attachment_url( $bg_image_id );
-// 	$bg_image = file_get_contents( $bg_image_src );
 	$mg_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_mg', true );
 	$mg_image_src = wp_get_attachment_url( $mg_image_id );
-// 	$mg_image = file_get_contents( $mg_image_src );
 	$trim_image_id = get_post_meta( $section->ID, 'cAc_wpsml_section_trim', true );
 	$trim_image_src = wp_get_attachment_url( $trim_image_id );
 	$trim_side = get_post_meta( $section->ID, 'cAc_wpsml_section_trim_side', true );
@@ -176,6 +174,58 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_bg" title="Set Background Layer SVG file" href="set-bg-image">Set Background Image</a>
 					<br/>
 					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_bg" <?php echo empty( $bg_image_id ) ? 'style="display: none;"' : '' ?> title="Remove Background Layer SVG file" href="remove-bg-image">Remove Background Image</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<hr/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3><?php echo __( 'Midground Layer', 'cAc_wpsml' ) ?></h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img style="width: 100%; height: auto;" class="cAc_wpsml_section_mg" src="<?php echo $mg_image_src; ?>"/>
+					<input type="hidden" id="cAc_wpsml_section_mg" name="cAc_wpsml_section_mg" value="<?php echo $mg_image_id; ?>" />
+					<br/>
+					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_mg" title="Set Midground Layer SVG file" href="set-mg-image">Set Midground Image</a>
+					<br/>
+					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_mg" <?php echo empty( $mg_image_id ) ? 'style="display: none;"' : '' ?> title="Remove Midground Layer SVG file" href="remove-mg-image">Remove Midground Image</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<hr/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h3><?php echo __( 'Trim Layer', 'cAc_wpsml' ) ?></h3>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img style="width: 100%; height: auto;" class="cAc_wpsml_section_trim" src="<?php echo $trim_image_src; ?>"/>
+					<input type="hidden" id="cAc_wpsml_section_trim" name="cAc_wpsml_section_trim" value="<?php echo $trim_image_id; ?>" />
+					<br/>
+					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_trim" title="Set Trim Layer SVG file" href="set-mg-image">Set Trim Image</a>
+					<br/>
+					<a class="remove-cAc_wpsml-svg-field" id="remove-cAc_wpsml_section_trim" <?php echo empty( $trim_image_id ) ? 'style="display: none;"' : '' ?> title="Remove Trim Layer image file" href="remove-trim-image">Remove Trim Image</a>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="cAc_wpsml_section_trim_side">Which side does the trim appear on?</label><br/>
+					<input name="cAc_wpsml_section_trim_side" id="cAc_wpsml_section_trim_side_left" value="left" type="radio" <?php checked( 'left', $trim_side ); ?> /> Left<br/>
+					<input name="cAc_wpsml_section_trim_side" id="cAc_wpsml_section_trim_side_right" value="right" type="radio" <?php checked( 'right', $trim_side ); ?> /> Right
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<hr/>
 				</td>
 			</tr>
 		</tbody>
@@ -211,9 +261,13 @@ function cAc_wpsml_section_save_meta_box_fields( $section_id ) {
     	
 	//verify and sanitize values	
 	$bg = isset( $_POST['cAc_wpsml_section_bg'] ) ? $_POST['cAc_wpsml_section_bg'] : '';
+	$mg = isset( $_POST['cAc_wpsml_section_mg'] ) ? $_POST['cAc_wpsml_section_mg'] : '';
+	$trim = isset( $_POST['cAc_wpsml_section_trim'] ) ? $_POST['cAc_wpsml_section_trim'] : '';
 	
 	//save to db
 	update_post_meta( $section_id, 'cAc_wpsml_section_bg', $bg );
+	update_post_meta( $section_id, 'cAc_wpsml_section_mg', $mg );
+	update_post_meta( $section_id, 'cAc_wpsml_section_trim', $trim );
 
 }	//end cAc_wpsml_section_save_meta_box_fields
 add_action( 'save_post_cacsmlsection', 'cAc_wpsml_section_save_meta_box_fields' );
