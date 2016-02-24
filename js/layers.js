@@ -201,7 +201,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				
 					var responseObj = JSON.parse( response );
 					if( toFetch.bg ) {
-						bg.css( 'background-image', responseObj.bg );
+						bg.css( 'backgroundImage', responseObj.bg );
 					}
 					if( toFetch.mg ) {
 						mg.append( responseObj.mg );
