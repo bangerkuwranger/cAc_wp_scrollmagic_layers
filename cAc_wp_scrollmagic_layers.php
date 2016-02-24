@@ -353,27 +353,27 @@ function cAc_wpsml_load_section() {
 		$mediaurl = wp_get_attachment_url( get_post_thumbnail_id( intval( $_POST['id'] ), 'thumbnail') );
 		
 		
-		if( $_POST['bg'] ) {
+		if( $_POST['bg'] === true ) {
 		
 			$response['bg'] = file_get_contents( get_attached_file( $metas['cAc_wpsml_section_bg'][0] ) );
 		
 		}
-		if( $_POST['mg'] ) {
+		if( $_POST['mg'] === true ) {
 		
 			$response['mg'] = file_get_contents( get_attached_file( $metas['cAc_wpsml_section_mg'][0] ) );
 		
 		}
-		if( $_POST['content'] ) {
+		if( $_POST['content'] === true ) {
 		
 			$response['content'] = apply_filters( 'the_content', get_post( intval( $_POST['id'] ) )->post_content );
 		
 		}
-		if( $_POST['media'] ) {
+		if( $_POST['media'] === true ) {
 		
 			$response['media'] = '<img src="' . $mediaurl . '" />';
 		
 		}
-		if( $_POST['trim'] ) {
+		if( $_POST['trim'] === true ) {
 		
 			$response['trim'] = '<div class="cAc_wpsml_trim-' . $metas['cAc_wpsml_section_trim_side'] . '">' . '<img src="' . $metas['cAc_wpsml_section_trim'] . '" />' . '</div>';
 		
