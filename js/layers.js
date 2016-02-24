@@ -14,7 +14,7 @@ function triangle( w, side, pos ) {
 	var h = Math.round((5*w)/24);
 	var which = side + pos;
 	var elem = '<div class="triangle ' + pos + '" style="min-height: ' + h + 'px; background-image: url(data:image/svg+xml;utf8,';
-	var svg = '<svg height="' + h + '" width="' + w + '">';
+	var svg = '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="' + h + '" width="' + w + '">';
 	
 	switch (which) {
 	
