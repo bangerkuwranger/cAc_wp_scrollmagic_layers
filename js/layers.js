@@ -204,17 +204,24 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 						bg.css( 'background-image', responseObj.bg );
 					}
 					if( toFetch.mg ) {
-						mg.html( responseObj,mg );
+						mg.append( responseObj.mg );
 					}
 					if( toFetch.content ) {
-						content.html( responseObj.content );
+						content.append( responseObj.content );
 					}
-					if( toFetch.bg ) {
-						bg.css( 'background-image', responseObj.bg );
+					if( toFetch.media ) {
+						media.append( responseObj.media );
+					}
+					if( toFetch.trim ) {
+						trim.append( responseObj.trim );
 					}
 					console.log( responseObj );
-					jQuery('#' + id + ' .loading-content').fadeOut();
-					jQuery('#' + id + ' .loading-content').remove();
+					jQuery('#' + id + ' .loading-content').fadeOut( 500, function() {
+				
+						jQuery('#' + id + ' .loading-content').remove();
+					
+					});
+					
 				}
 			
 			});
