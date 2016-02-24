@@ -170,7 +170,7 @@ function cAc_wpsml_section_meta_box_fields( $section ) {
 			</tr>
 			<tr>
 				<td>
-					<img class="cAc_wpsml_section_bg" ><?php echo $bg_image ?></img>
+					<img style="width: 100%; height: auto;" class="cAc_wpsml_section_bg" src="<?php echo $bg_image_src; ?>"/>
 					<input type="hidden" id="cAc_wpsml_section_bg" name="cAc_wpsml_section_bg" value="<?php echo $bg_image_id; ?>" />
 					<br/>
 					<a class="set-cAc_wpsml-svg-field" id="set-cAc_wpsml_section_bg" title="Set Background Layer SVG file" href="set-bg-image">Set Background Image</a>

@@ -3,7 +3,6 @@ use editor window for cac_wpsml admin fields
 */
 jQuery(function() {
 
-	console.log( 'cac_wpsml admin loaded' );
 	if (jQuery('.set-cAc_wpsml-svg-field').length > 0) {
 	
 		window.send_to_editor_default = window.send_to_editor;
@@ -36,7 +35,7 @@ jQuery(function() {
 			jQuery('#' + fieldID).val(imgId);
 			jQuery('#remove-' + fieldID).show();
 
-			jQuery('img.' + fieldID).html(imgSrc);
+			jQuery('img.' + fieldID).attr('src',imgSrc);
 
 			try{tb_remove();}catch(e){};
 
