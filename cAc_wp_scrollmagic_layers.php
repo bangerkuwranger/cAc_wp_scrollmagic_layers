@@ -375,7 +375,7 @@ function cAc_wpsml_load_section() {
 		}
 		if( $_POST['trim'] === "true" ) {
 		
-			$response['trim'] = '<div class="cAc_wpsml_trim-' . $metas['cAc_wpsml_section_trim_side'][0] . '">' . '<img src="' . $metas['cAc_wpsml_section_trim'][0] . '" />' . '</div>';
+			$response['trim'] = '<div class="cAc_wpsml_trim-' . $metas['cAc_wpsml_section_trim_side'][0] . '">' . '<img src="' . wp_get_attachment_url( $metas['cAc_wpsml_section_trim'][0] ) . '" />' . '</div>';
 		
 		}
 	
