@@ -263,11 +263,13 @@ function cAc_wpsml_section_save_meta_box_fields( $section_id ) {
 	$bg = isset( $_POST['cAc_wpsml_section_bg'] ) ? $_POST['cAc_wpsml_section_bg'] : '';
 	$mg = isset( $_POST['cAc_wpsml_section_mg'] ) ? $_POST['cAc_wpsml_section_mg'] : '';
 	$trim = isset( $_POST['cAc_wpsml_section_trim'] ) ? $_POST['cAc_wpsml_section_trim'] : '';
+	$trim_side = isset( $_POST['cAc_wpsml_section_trim_side'] ) ? $_POST['cAc_wpsml_section_trim_side'] : '';
 	
 	//save to db
 	update_post_meta( $section_id, 'cAc_wpsml_section_bg', $bg );
 	update_post_meta( $section_id, 'cAc_wpsml_section_mg', $mg );
 	update_post_meta( $section_id, 'cAc_wpsml_section_trim', $trim );
+	update_post_meta( $section_id, 'cAc_wpsml_section_trim_side', $trim_side );
 
 }	//end cAc_wpsml_section_save_meta_box_fields
 add_action( 'save_post_cacsmlsection', 'cAc_wpsml_section_save_meta_box_fields' );
