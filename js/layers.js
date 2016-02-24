@@ -234,8 +234,12 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				
 					var responseObj = JSON.parse( response );
 					if( toFetch.bg ) {
-						bg.prepend( triangle( cAc_wpsmlViewport.width, responseObj.bg, 'top' ) );
-						bg.append( triangle( cAc_wpsmlViewport.width, responseObj.bg, 'bottom' ) );
+						var cWidth = cAc_wpsmlViewport.width;
+						if (cWidth > breakpoints.lg) {
+							cWidth = breakpoints.lg;
+						}
+						bg.prepend( triangle( cWidth, responseObj.bg, 'top' ) );
+						bg.append( triangle( cWidth, responseObj.bg, 'bottom' ) );
 					}
 					if( toFetch.mg ) {
 						mg.append( responseObj.mg );
