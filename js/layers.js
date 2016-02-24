@@ -13,28 +13,28 @@ function triangle( w, side, pos ) {
 
 	var h = Math.round((5*w)/24);
 	var which = side + pos;
-	var elem = '<div class="triangle ' + pos + '" style="min-height: ' + h + '; background-image: url(data:image/svg+xml;utf8,';
+	var elem = '<div class="triangle ' + pos + '" style="min-height: ' + h + 'px; background-image: url(data:image/svg+xml;utf8,';
 	var svg = '<svg height="' + h + '" width="' + w + '">';
 	
 	switch (which) {
 	
 		case 'righttop':
-			svg += '<polygon points="0,0 ' + w + ',0 ' + w + ',' + h + '" style="fill:white;" />';
+			svg += '<polygon points="0,0 ' + w + ',0 ' + w + ',' + h + '" style="fill:lime;" />';
 			break;
 		case 'rightbottom':
-			svg += '<polygon points="' + w + ',0 ' + w + ',' + h + ' 0,' + h + '" style="fill:white;" />';
+			svg += '<polygon points="' + w + ',0 ' + w + ',' + h + ' 0,' + h + '" style="fill:lime;" />';
 			break;
 		case 'lefttop':
-			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',0" style="fill:white;" />';
+			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',0" style="fill:lime;" />';
 			break;
 		case 'leftbottom':
-			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',' + h + '" style="fill:white;" />';
+			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',' + h + '" style="fill:lime;" />';
 			break;
 		default:
 			return false;
 	
 	}
-	
+	svg += '</svg>';
 	elem += encodeURIComponent(svg);
 	elem += ')"></div>';
 	
