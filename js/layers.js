@@ -22,35 +22,35 @@ jQuery(function($) {
 		$media = $(this).find('.cAc_wpsml-media'),
 		$trim = $(this).find('.cAc_wpsml-trim');
 		
-		if( $bg.length > -1 ) {
+		if( $bg.length > 0 ) {
 			var bg = $bg;
 		}
 		else {
 			var bg = false;
 		}
 		
-		if( $mg.length > -1 ) {
+		if( $mg.length > 0 ) {
 			var mg = $mg;
 		}
 		else {
 			var mg = false;
 		}
 		
-		if( $content.length > -1 ) {
+		if( $content.length > 0 ) {
 			var content = $content;
 		}
 		else {
 			var content = false;
 		}
 		
-		if( $media.length > -1 ) {
+		if( $media.length > 0 ) {
 			var media = $media;
 		}
 		else {
 			var media = false;
 		}
 		
-		if( $trim.length > -1 ) {
+		if( $trim.length > 0 ) {
 			var trim = $trim;
 		}
 		else {

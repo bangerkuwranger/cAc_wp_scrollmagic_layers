@@ -308,12 +308,12 @@ function cAc_wpsml_section_shortcode( $atts ) {
 	
 	$html = '<div class="cAc_wpsml-pageSection" id="section-' . $id .'">';
 
-	if( !empty( $metas['cAc_wpsml_section_bg'] ) ) {
+	if( !empty( $meta['cAc_wpsml_section_bg'] ) ) {
 		$html .= '<div class="cAc_wpsml-bg">';
 		$html .= '</div>';
 	}
 	
-	if( !empty( $metas['cAc_wpsml_section_mg'] ) ) {
+	if( !empty( $meta['cAc_wpsml_section_mg'] ) ) {
 		$html .= '<div class="cAc_wpsml-mg">';
 		$html .= '</div>';
 	}
@@ -328,13 +328,14 @@ function cAc_wpsml_section_shortcode( $atts ) {
 		$html .= '</div>';
 	}
 
-	if( !empty( $metas['cAc_wpsml_section_trim'] ) ) {
+	if( !empty( $meta['cAc_wpsml_section_trim'] ) ) {
 		$html .= '<div class="cAc_wpsml-trim">';
 		$html .= '</div>';
 	}
 	
 	$html .= '</div>';
 	apply_filters( 'cAc_wpsml_render_page_section', $html );
+	
 	return $html;
 
 }	//end cAc_wpsml_section_shortcode( $atts )
