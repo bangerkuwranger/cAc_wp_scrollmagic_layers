@@ -90,7 +90,7 @@ jQuery(function($) {
 			var trim = false;
 		}
 		
-		loadSectionScene( thisId, bg, mg, content, media, trim );
+		loadSectionScene( thisId, $bg, mg, content, media, trim );
 		
 		//tweens & scenes (tweens currently commented out)
 	
@@ -177,7 +177,7 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	
 	//don't fetch empty bg
 	if (bg) {
-		$bg.append(faLoader);
+		bg.append(faLoader);
 	}
 	else {
 		toFetch.bg = false;
