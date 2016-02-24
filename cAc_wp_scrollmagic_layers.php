@@ -347,7 +347,7 @@ add_action( 'wp_ajax_cAc_wpsml_load_section', 'cAc_wpsml_load_section' );
 function cAc_wpsml_load_section() {
 
 	$response = array();
-	if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
+	if( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 	
 		$metas = get_post_meta( intval( $_POST['id'] ) );
 		$mediaurl = wp_get_attachment_url( get_post_thumbnail_id( intval( $_POST['id'] ), 'thumbnail') );
@@ -379,6 +379,12 @@ function cAc_wpsml_load_section() {
 		
 		}
 	
+	}
+	if( empty( $response ) ) {
+	
+		$response['error'] = 'No fields in POST';
+		$response['post'] = $_POST;
+		
 	}
 	echo json_encode( $response );
 	die();
