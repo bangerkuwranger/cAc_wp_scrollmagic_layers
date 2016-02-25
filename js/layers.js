@@ -234,10 +234,11 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 				
 					var responseObj = JSON.parse( response );
 					if( toFetch.bg ) {
-						var cWidth = cAc_wpsmlViewport.width;
-						if (cWidth > breakpoints.lg) {
-							cWidth = breakpoints.lg;
-						}
+// 						var cWidth = cAc_wpsmlViewport.width;
+						// if (cWidth > breakpoints.lg) {
+// 							cWidth = breakpoints.lg;
+// 						}
+						var cWidth = breakpoints.lg;//all triangles just need to be 1240; no need to retriangle
 						bg.prepend( triangle( cWidth, responseObj.bg, 'top' ) );
 						bg.append( triangle( cWidth, responseObj.bg, 'bottom' ) );
 					}
