@@ -9,6 +9,10 @@ breakpoints = {
 	'xl':	1400
 };
 
+
+///now with no retriangling, need to pull addtl. elements in if viewport is upsized. maybe set a body class?
+
+
 function triangle( w, side, pos ) {
 
 	var h = Math.round((5*w)/24);
