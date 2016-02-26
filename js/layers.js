@@ -163,7 +163,7 @@ jQuery(function($) {
 			
 					});
 		
-				});
+				}, 500, 'cAc_wpsml_loadMoreStuff');
 		
 			}
 		}
