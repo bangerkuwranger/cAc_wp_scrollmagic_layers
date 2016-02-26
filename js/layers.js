@@ -95,7 +95,7 @@ jQuery(function($) {
 		}
 		
 		loadSectionScene( thisId, $bg, mg, content, media, trim );
-		cac_wpsml_bodyClass();
+		cac_wpsml_bodyClass(cAc_wpsmlViewport, breakpoints);
 		
 		//tweens & scenes (tweens currently commented out)
 	
