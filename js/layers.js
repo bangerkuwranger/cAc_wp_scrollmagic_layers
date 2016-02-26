@@ -237,7 +237,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 							]);
 						}
 						if (typeof scenes[thisId] == "undefined") {
-							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 1, duration: thisDuration, offset: -100})
+							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 1, duration: thisDuration, offset: 0})
 										.setTween(tweens[thisId])
 // 										.setPin("#" + thisId, {pushFollowers: true})
 						// 					.setPin("#" + thisId + " .cAc_wpsml-media")
