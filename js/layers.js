@@ -221,6 +221,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 						jQuery('#' + id + ' .loading-content').remove();
 						var thisId =jQuery(bg).attr('id');
 						var heightMedia = jQuery("#" + thisId + " .cAc_wpsml-media").height();
+						var transMedia = jQuery("#" + thisId + " .cAc_wpsml-media image").css('translate');
 						var heightContent = jQuery("#" + thisId + " .cAc_wpsml-content").height();
 						var heightTriangle = jQuery("#" + thisId + " .triangle.bottom").height();
 						jQuery("#" + thisId).height(heightMedia+heightContent+(heightTriangle*2));
@@ -228,13 +229,14 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 						var thisDuration = jQuery("#" + thisId).height() - (heightTriangle*2);
 						if (typeof tweens[thisId] == "undefined") {
 							tweens[thisId] = new TimelineMax().add([ 
-								TweenMax.fromTo("#" + thisId, 1, {top: 0}, {top:-10, ease: SlowMo.ease.config(0.7, 0.7, false)}),
-								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia}, {top:-100, ease: SlowMo.ease.config(0.7, 0.7, false)}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-mg", 1, {top: 100}, {top:0, ease: SlowMo.ease.config(0.7, 0.7, false)}),
+								TweenMax.fromTo("#" + thisId , 1, {top: 0}, {top:-25, ease: SlowMo.ease.config(0.7, 0.7, false)}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia, translate: rotate(0)}, {top:-100, transMedia, ease: SlowMo.ease.config(0.7, 0.7, false)}),
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia), ease: SlowMo.ease.config(0.7, 0.7, false)})
 							]);
 						}
 						if (typeof scenes[thisId] == "undefined") {
-							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 0, duration: thisDuration, offset: 0})
+							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 0, duration: thisDuration, offset: -25})
 										.setTween(tweens[thisId])
 										.setPin("#" + thisId, {pushFollowers: false})
 						// 					.setPin("#" + thisId + " .cAc_wpsml-media")
