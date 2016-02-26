@@ -95,6 +95,7 @@ jQuery(function($) {
 		}
 		
 		loadSectionScene( thisId, $bg, mg, content, media, trim );
+		cac_wpsml_bodyClass();
 		
 		//tweens & scenes (tweens currently commented out)
 	
@@ -149,6 +150,33 @@ jQuery(function($) {
 		}
 		*/
 	});	//end $('.cAc_wpsml-pageSection').each( function()
+	
+	$(window).resize(function () {
+		
+		var resize_action = cac_wpsml_bodyClass();
+		
+		if (resize_action) {
+
+			if (typeof('waitForFinalEvent') == 'function') {
+		
+				waitForFinalEvent( function() {
+					$('.cAc_wpsml-pageSection').each( function() {
+		
+						var thisId = $(this).attr('id'),
+						$bg = false;
+						$mg = ((resize_action % 11) ? (this).find('.cAc_wpsml-mg') : false),
+						$content = false,
+						$media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
+						$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
+						loadSectionScene( thisId, $bg, mg, content, media, trim );
+			
+					});
+		
+				});
+		
+			}
+		}
+	});
 
 });	//end jQuery(function($)
 
@@ -168,6 +196,8 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 		var w=window,d=document,e=d.documentElement,g=d.getElementsByTagName('body')[0],x=w.innerWidth||e.clientWidth||g.clientWidth,y=w.innerHeight||e.clientHeight||g.clientHeight;
 		cAc_wpsmlViewport = { width:x, height:y };
 	}
+	
+	cac_wpsml_bodyClass(cAc_wpsmlViewport, breakpoints);
 	
 	var toFetch = {
 		'bg':		true,
@@ -279,3 +309,40 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	return true; 
 
 }	//end loadSectionScene( id )
+
+
+function cac_wpsml_bodyClass( cAc_wpsmlViewport, breakpoints ) {
+
+	var sizeWas = 3;
+	var sizeIs = 0;
+	
+	if (!document.body.classList.contains('bkpt-lg')) {
+		sizeWas = 2;
+		if (!document.body.classList.contains('bkpt-md')) {
+			sizeWas = 1;
+			if (!document.body.classList.contains('bkpt-sm')) {
+				sizeWas = 0;
+			}
+		}
+	}
+	
+	if (cAc_wpsmlViewport.width >= breakpoints.sm) {
+		$body.addClass('bkpt-sm');
+		sizeIs = 1;
+		if (cAc_wpsmlViewport.width >= breakpoints.md) {
+			$body.addClass('bkpt-md');
+			sizeIs = 2;
+			if (cAc_wpsmlViewport.width >= breakpoints.lg) {
+				$body.addClass('bkpt-lg');
+				sizeIs = 3;
+			}
+		}
+	}
+	
+	if ((sizeIs - sizeWas) < 1) {
+		return false;
+	}
+	//returns two digit number representing what to load
+	return( ((sizeIs).toString() + (sizeIs - sizeWas).toString()).valueOf() );
+
+}
