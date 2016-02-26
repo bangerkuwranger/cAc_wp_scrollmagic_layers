@@ -153,14 +153,14 @@ jQuery(function($) {
 
 				var thisId = $(this).attr('id'),
 				$bg = false,
-				divbyeleven = resize_action % 11;
+				divbyeleven = +resize_action % 11;
 				if ( divbyeleven === 0 ) {
 					var $mg = $(this).find('.cAc_wpsml-mg');
 				}
 				else {	
 					var $mg = false;
 				}
-				var $media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
+				var $media = ((+resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
 				$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
 				loadSectionScene( thisId, $bg, $mg, $media, $trim );
 	
