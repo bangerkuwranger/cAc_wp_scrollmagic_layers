@@ -327,18 +327,18 @@ function cAc_wpsml_section_shortcode( $atts ) {
 		$html .= '</div>';
 	}
 
+	if( has_post_thumbnail( $section ) ) {
+		$html .= '<div class="cAc_wpsml-media">';
+		$html .= '</div>';
+	}
+
 	if( !empty( $section->post_content ) ) {
 		$html .= '<div class="cAc_wpsml-content">';
 			$html .= apply_filters( 'the_content', $section->post_content );
 		$html .= '</div>';
 	}
 
-	if( has_post_thumbnail( $section ) ) {
-		$html .= '<div class="cAc_wpsml-media">';
-		$html .= '</div>';
-	}
-
-	if( !empty( $meta['cAc_wpsml_section_trim'] ) ) {
+		if( !empty( $meta['cAc_wpsml_section_trim'] ) ) {
 		$html .= '<div class="cAc_wpsml-trim">';
 		$html .= '</div>';
 	}
