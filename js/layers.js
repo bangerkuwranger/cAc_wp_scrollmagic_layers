@@ -88,59 +88,59 @@ jQuery(function($) {
 		
 		loadSectionScene( thisId, $bg, mg, media, trim );
 		cac_wpsml_bodyClass(cAc_wpsmlViewport, breakpoints);
-		
+		$(window).load(function() {
 		//tweens & scenes (tweens currently commented out)
-	
-	/*	if( bg != false ) {
+// 		if( bg != false ) {
 			tweens[thisId + "bg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-bg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 500, offset: 0})
+			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 0})
 						// .setTween(tweens[thisId])
 						.setPin("#" + thisId + " .cAc_wpsml-bg")
 						.addTo(controller);
 			// show indicators (requires debug extension)
 			scenes[thisId + "bg"].addIndicators();
-		}
+// 		}
 		
-		if( mg != false ) {
+// 		if( mg != false ) {
 			tweens[thisId + "mg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-mg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "mg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-mg", duration: 500, offset: 0})
+			scenes[thisId + "mg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 50})
 						// .setTween(tweens[thisId])
 						.setPin("#" + thisId + " .cAc_wpsml-mg")
 						.addTo(controller);
 			// show indicators (requires debug extension)
 			scenes[thisId + "mg"].addIndicators();
-		}
+// 		}
 		
-		if( content != false ) { ///this isn't checked with a var called content any more... need to do it here
+// 		if( content != false ) { ///this isn't checked with a var called content any more... need to do it here
 			tweens[thisId + "content"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-content", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-content", duration: 500, offset: 0})
+			scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 150})
 						// .setTween(tweens[thisId])
 						.setPin("#" + thisId + " .cAc_wpsml-content")
 						.addTo(controller);
 			// show indicators (requires debug extension)
 			scenes[thisId + "content"].addIndicators();
-		}
+// 		}
 		
-		if( media != false ) {
+// 		if( media != false ) {
 			tweens[thisId + "media"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-media", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "media"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-media", duration: 500, offset: 0})
+			scenes[thisId + "media"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 100})
 						// .setTween(tweens[thisId])
 						.setPin("#" + thisId + " .cAc_wpsml-media")
 						.addTo(controller);
 			// show indicators (requires debug extension)
 			scenes[thisId + "media"].addIndicators();
-		}
+// 		}
 		
-		if( trim != false ) {
+// 		if( trim != false ) {
 			tweens[thisId + "trim"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-trim", 1000, {top: "-40%", ease: Linear.easeNone}) ]);
-			scenes[thisId + "trim"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-trim", duration: 2000, offset: 0})
+			scenes[thisId + "trim"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 250})
 						// .setTween(tweens[thisId])
 						.setPin("#" + thisId + " .cAc_wpsml-trim")
 						.addTo(controller);
 			// show indicators (requires debug extension)
 			scenes[thisId + "trim"].addIndicators();
-		}
-		*/
+// 		}
+		});
+		
 	});	//end $('.cAc_wpsml-pageSection').each( function()
 	
 	$(window).resize(function () {
@@ -153,7 +153,7 @@ jQuery(function($) {
 
 				var thisId = $(this).attr('id'),
 				$bg = false,
-				divbyeleven = +resize_action % 11;
+				divbyeleven = resize_action % 11;
 				if ( divbyeleven === 0 ) {
 					var $mg = $(this).find('.cAc_wpsml-mg');
 				}
