@@ -55,7 +55,6 @@ jQuery(function($) {
 		var thisId = $(this).attr('id'),
 		bg = $(this).hasClass('cAc_wpsml-bg'),
 		$mg = $(this).find('.cAc_wpsml-mg'),
-		$content = $(this).find('.cAc_wpsml-content'),
 		$media = $(this).find('.cAc_wpsml-media'),
 		$trim = $(this).find('.cAc_wpsml-trim');
 		
@@ -73,13 +72,6 @@ jQuery(function($) {
 			var mg = false;
 		}
 		
-		if( $content.length > 0 ) {
-			var content = $content;
-		}
-		else {
-			var content = false;
-		}
-		
 		if( $media.length > 0 ) {
 			var media = $media;
 		}
@@ -94,7 +86,7 @@ jQuery(function($) {
 			var trim = false;
 		}
 		
-		loadSectionScene( thisId, $bg, mg, content, media, trim );
+		loadSectionScene( thisId, $bg, mg, media, trim );
 		cac_wpsml_bodyClass(cAc_wpsmlViewport, breakpoints);
 		
 		//tweens & scenes (tweens currently commented out)
@@ -119,7 +111,7 @@ jQuery(function($) {
 			scenes[thisId + "mg"].addIndicators();
 		}
 		
-		if( content != false ) {
+		if( content != false ) { ///this isn't checked with a var called content any more... need to do it here
 			tweens[thisId + "content"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-content", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
 			scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-content", duration: 500, offset: 0})
 						// .setTween(tweens[thisId])
@@ -165,10 +157,9 @@ jQuery(function($) {
 						var thisId = $(this).attr('id'),
 						$bg = false;
 						$mg = ((resize_action % 11) ? (this).find('.cAc_wpsml-mg') : false),
-						$content = false,
 						$media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
 						$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
-						loadSectionScene( thisId, $bg, mg, content, media, trim );
+						loadSectionScene( thisId, $bg, mg, media, trim );
 			
 					});
 		
@@ -177,24 +168,11 @@ jQuery(function($) {
 			}
 		}
 	});
-	
-	if ($('.cAc_wpsml-content').length > 0) {
-	
-		$('.cAc_wpsml-content').each( function() {
-		
-			$(this).find('h1').addClass('benefit');
-			$(this).find('h2').addClass('ingredients');
-			$(this).find('h3').addClass('need-state');
-			$(this).find('a').addClass('btn');
-		
-		});
-	
-	}
 
 });	//end jQuery(function($)
 
 //load the content for each scene based on viewport width and whether content exists (existence determined in shortcode)
-function loadSectionScene( id, bg, mg, content, media, trim ) {
+function loadSectionScene( id, bg, mg, media, trim ) {
 
 	if (!id) {
 		return false;
@@ -215,7 +193,6 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	var toFetch = {
 		'bg':		true,
 		'mg':		false,
-		'content':	true,
 		'media':	false,
 		'trim':		false
 	};
@@ -234,14 +211,6 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 	if (mg && cAc_wpsmlViewport.width > breakpoints.sm) {
 		toFetch.mg = true;
 		mg.append(faLoader);
-	}
-	
-	//don't fetch empty content
-	if (content) {
-		content.append(faLoader);
-	}
-	else {
-		toFetch.content = false;
 	}
 	
 	//only fetch media if exists and above medium breakpoint
@@ -273,7 +242,6 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 							'id':		id.replace('section-', ''),
 							'bg':		toFetch.bg,
 							'mg':		toFetch.mg,
-							'content':	toFetch.content,
 							'media':	toFetch.media,
 							'trim':		toFetch.trim,
 				},
@@ -291,9 +259,6 @@ function loadSectionScene( id, bg, mg, content, media, trim ) {
 					}
 					if( toFetch.mg ) {
 						mg.append( responseObj.mg );
-					}
-					if( toFetch.content ) {
-						content.append( responseObj.content );
 					}
 					if( toFetch.media ) {
 						media.append( responseObj.media );

@@ -329,6 +329,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 
 	if( !empty( $section->post_content ) ) {
 		$html .= '<div class="cAc_wpsml-content">';
+			apply_filters( 'the_content', $section->post_content );
 		$html .= '</div>';
 	}
 
@@ -370,11 +371,6 @@ function cAc_wpsml_load_section() {
 		if( $_POST['mg'] === "true" ) {
 		
 			$response['mg'] = file_get_contents( get_attached_file( $metas['cAc_wpsml_section_mg'][0] ) );
-		
-		}
-		if( $_POST['content'] === "true" ) {
-		
-			$response['content'] = apply_filters( 'the_content', get_post( intval( $_POST['id'] ) )->post_content );
 		
 		}
 		if( $_POST['media'] === "true" ) {
