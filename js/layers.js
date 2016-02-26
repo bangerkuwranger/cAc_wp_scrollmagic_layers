@@ -152,9 +152,10 @@ jQuery(function($) {
 			$('.cAc_wpsml-pageSection').each( function() {
 
 				var thisId = $(this).attr('id'),
-				$bg = false;
-				if ( (+resize_action % 11) =0 ) {
-					var $mg = $(this).find('.cAc_wpsml-mg')
+				$bg = false,
+				divbyeleven = resize_action % 11;
+				if ( divbyeleven ) {
+					var $mg = $(this).find('.cAc_wpsml-mg');
 				}
 				else {	
 					var $mg = false;
