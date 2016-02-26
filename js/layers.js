@@ -161,7 +161,7 @@ jQuery(function($) {
 					var $mg = false;
 				}
 				var $media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
-				var $trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
+				$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
 				loadSectionScene( thisId, $bg, mg, media, trim );
 	
 			});
