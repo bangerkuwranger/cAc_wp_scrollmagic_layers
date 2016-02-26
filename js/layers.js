@@ -88,58 +88,7 @@ jQuery(function($) {
 		
 		loadSectionScene( thisId, $bg, mg, media, trim );
 		cac_wpsml_bodyClass(cAc_wpsmlViewport, breakpoints);
-		$(window).load(function() {
-		//tweens & scenes (tweens currently commented out)
-// 		if( bg != false ) {
-			tweens[thisId + "bg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-bg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 0})
-						// .setTween(tweens[thisId])
-						.setPin("#" + thisId + " .cAc_wpsml-bg")
-						.addTo(controller);
-			// show indicators (requires debug extension)
-			scenes[thisId + "bg"].addIndicators();
-// 		}
 		
-// 		if( mg != false ) {
-			tweens[thisId + "mg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-mg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "mg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 50})
-						// .setTween(tweens[thisId])
-						.setPin("#" + thisId + " .cAc_wpsml-mg")
-						.addTo(controller);
-			// show indicators (requires debug extension)
-			scenes[thisId + "mg"].addIndicators();
-// 		}
-		
-// 		if( content != false ) { ///this isn't checked with a var called content any more... need to do it here
-			tweens[thisId + "content"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-content", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 150})
-						// .setTween(tweens[thisId])
-						.setPin("#" + thisId + " .cAc_wpsml-content")
-						.addTo(controller);
-			// show indicators (requires debug extension)
-			scenes[thisId + "content"].addIndicators();
-// 		}
-		
-// 		if( media != false ) {
-			tweens[thisId + "media"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-media", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
-			scenes[thisId + "media"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 100})
-						// .setTween(tweens[thisId])
-						.setPin("#" + thisId + " .cAc_wpsml-media")
-						.addTo(controller);
-			// show indicators (requires debug extension)
-			scenes[thisId + "media"].addIndicators();
-// 		}
-		
-// 		if( trim != false ) {
-			tweens[thisId + "trim"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-trim", 1000, {top: "-40%", ease: Linear.easeNone}) ]);
-			scenes[thisId + "trim"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 250})
-						// .setTween(tweens[thisId])
-						.setPin("#" + thisId + " .cAc_wpsml-trim")
-						.addTo(controller);
-			// show indicators (requires debug extension)
-			scenes[thisId + "trim"].addIndicators();
-// 		}
-		});
 		
 	});	//end $('.cAc_wpsml-pageSection').each( function()
 	
@@ -270,7 +219,82 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 					jQuery('#' + id + ' .loading-content').fadeOut( 500, function() {
 				
 						jQuery('#' + id + ' .loading-content').remove();
-					
+						var thisId =jQuery(bg).attr('id');
+						var heightMedia = jQuery("#" + thisId + " .cAc_wpsml-media").height();
+						var heightContent = jQuery("#" + thisId + " .cAc_wpsml-content").height();
+						var heightTriangle = jQuery("#" + thisId + " .triangle.bottom").height();
+						jQuery("#" + thisId).height(heightMedia+heightContent+(heightTriangle*2));
+						jQuery("#" + thisId).css('padding', heightTriangle + 'px 0px');
+						var thisDuration = jQuery("#" + thisId).height() - (heightTriangle*2);
+						if (typeof tweens[thisId] == "undefined") {
+							tweens[thisId] = new TimelineMax().add([ 
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia}, {top:-100, ease: SlowMo.ease.config(0.7, 0.7, false)}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia), ease: SlowMo.ease.config(0.7, 0.7, false)})
+							]);
+						}
+						if (typeof scenes[thisId] == "undefined") {
+							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 0, duration: thisDuration, offset: 0})
+										.setTween(tweens[thisId])
+										.setPin("#" + thisId, {pushFollowers: false})
+						// 					.setPin("#" + thisId + " .cAc_wpsml-media")
+										;
+
+							scenes[thisId].addTo(controller);
+							// show indicators (requires debug extension)
+							scenes[thisId].addIndicators();
+						}
+		
+		//tweens & scenes (tweens currently commented out)
+// 		if( bg != false ) {
+/*			tweens[thisId + "bg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-bg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
+			scenes[thisId + "bg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 0})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + " .cAc_wpsml-bg")
+						.addTo(controller);
+			// show indicators (requires debug extension)
+			scenes[thisId + "bg"].addIndicators();
+// 		}
+		
+// 		if( mg != false ) {
+			tweens[thisId + "mg"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-mg", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
+			scenes[thisId + "mg"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 50})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + " .cAc_wpsml-mg")
+						.addTo(controller);
+			// show indicators (requires debug extension)
+			scenes[thisId + "mg"].addIndicators();
+// 		}
+		
+// 		if( content != false ) { ///this isn't checked with a var called content any more... need to do it here
+			tweens[thisId + "content"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-content", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
+			scenes[thisId + "content"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 150})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + " .cAc_wpsml-content")
+						.addTo(controller);
+			// show indicators (requires debug extension)
+			scenes[thisId + "content"].addIndicators();
+// 		}
+		
+// 		if( media != false ) {
+			tweens[thisId + "media"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-media", 1000, {top: "-40px", ease: Linear.easeNone}) ]);
+			scenes[thisId + "media"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 1000})
+						.setTween(tweens[thisId])
+						.setPin("#" + thisId + " .cAc_wpsml-media")
+						.addTo(controller);
+			// show indicators (requires debug extension)
+			scenes[thisId + "media"].addIndicators();
+// 		}
+		
+// 		if( trim != false ) {
+			tweens[thisId + "trim"] = new TimelineMax().add([ TweenMax.to("#section-" + thisId + " .cAc_wpsml-trim", 1000, {top: "-40%", ease: Linear.easeNone}) ]);
+			scenes[thisId + "trim"] = new ScrollMagic.Scene({triggerElement: "#" + thisId + " .cAc_wpsml-bg", duration: 0, offset: 250})
+						// .setTween(tweens[thisId])
+						.setPin("#" + thisId + " .cAc_wpsml-trim")
+						.addTo(controller);
+			// show indicators (requires debug extension)
+			scenes[thisId + "trim"].addIndicators();
+// 		}
+				*/	
 					});
 					
 				}
