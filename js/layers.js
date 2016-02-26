@@ -23,16 +23,16 @@ function triangle( w, side, pos ) {
 	switch (which) {
 	
 		case 'righttop':
-			svg += '<polygon points="0,0 ' + w + ',0 ' + w + ',' + h + '" style="fill:lime;" />';
+			svg += '<polygon points="0,0 ' + w + ',0 ' + w + ',' + h + '" style="fill:white;" />';
 			break;
 		case 'rightbottom':
-			svg += '<polygon points="' + w + ',0 ' + w + ',' + h + ' 0,' + h + '" style="fill:lime;" />';
+			svg += '<polygon points="' + w + ',0 ' + w + ',' + h + ' 0,' + h + '" style="fill:white;" />';
 			break;
 		case 'lefttop':
-			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',0" style="fill:lime;" />';
+			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',0" style="fill:white;" />';
 			break;
 		case 'leftbottom':
-			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',' + h + '" style="fill:lime;" />';
+			svg += '<polygon points="0,0 0,' + h + ' ' + w + ',' + h + '" style="fill:white;" />';
 			break;
 		default:
 			return false;
@@ -228,6 +228,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 						var thisDuration = jQuery("#" + thisId).height() - (heightTriangle*2);
 						if (typeof tweens[thisId] == "undefined") {
 							tweens[thisId] = new TimelineMax().add([ 
+								TweenMax.fromTo("#" + thisId, 1, {top: 0}, {top:-10, ease: SlowMo.ease.config(0.7, 0.7, false)}),
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia}, {top:-100, ease: SlowMo.ease.config(0.7, 0.7, false)}),
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia), ease: SlowMo.ease.config(0.7, 0.7, false)})
 							]);
