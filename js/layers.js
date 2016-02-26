@@ -221,24 +221,25 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 						jQuery('#' + id + ' .loading-content').remove();
 						var thisId =jQuery(bg).attr('id');
 						var heightMedia = jQuery("#" + thisId + " .cAc_wpsml-media").height();
-						var transMedia = jQuery("#" + thisId + " .cAc_wpsml-media image").css('transform');
 						var heightContent = jQuery("#" + thisId + " .cAc_wpsml-content").height();
 						var heightTriangle = jQuery("#" + thisId + " .triangle.bottom").height();
-						jQuery("#" + thisId).height(heightMedia+heightContent+(heightTriangle*2));
+						var heightTrim = jQuery("#" + thisId + " .cAc_wpsml-trim > div").height();
+						jQuery("#" + thisId).height(heightMedia+heightContent);
 						jQuery("#" + thisId).css('padding', heightTriangle + 'px 0px');
-						var thisDuration = jQuery("#" + thisId).height() - (heightTriangle*2);
+						var thisDuration = jQuery(window).height()+100;
 						if (typeof tweens[thisId] == "undefined") {
 							tweens[thisId] = new TimelineMax().add([ 
-								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-mg", 1, {top: 100}, {top:0, ease: SlowMo.ease.config(0.7, 0.7, false)}),
-								TweenMax.fromTo("#" + thisId , 1, {top: 0}, {top:-25, ease: SlowMo.ease.config(0.7, 0.7, false)}),
-								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {css:{top: heightMedia, transform: rotate(0)}}, {css:{top:-100, transform: transMedia}, ease: SlowMo.ease.config(0.7, 0.7, false)}),
-								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia), ease: SlowMo.ease.config(0.7, 0.7, false)})
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-mg", 0.75, {top: 100}, {top:0}),
+								TweenMax.fromTo("#" + thisId , 1, {top: 50}, {top: 0}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia, rotation: -15}, {top:-100, rotation: 15}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia)}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-trim > div", 1, {bottom: -(heightTrim)}, {bottom: heightTriangle})
 							]);
 						}
 						if (typeof scenes[thisId] == "undefined") {
-							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 0, duration: thisDuration, offset: -25})
+							scenes[thisId] = new ScrollMagic.Scene({triggerElement: "#"+thisId, triggerHook: 1, duration: thisDuration, offset: -100})
 										.setTween(tweens[thisId])
-										.setPin("#" + thisId, {pushFollowers: false})
+// 										.setPin("#" + thisId, {pushFollowers: true})
 						// 					.setPin("#" + thisId + " .cAc_wpsml-media")
 										;
 
@@ -246,6 +247,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 							// show indicators (requires debug extension)
 							scenes[thisId].addIndicators();
 						}
+		
 		
 		//tweens & scenes (tweens currently commented out)
 // 		if( bg != false ) {
