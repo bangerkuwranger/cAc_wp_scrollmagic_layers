@@ -154,7 +154,7 @@ jQuery(function($) {
 				var thisId = $(this).attr('id'),
 				$bg = false,
 				divbyeleven = resize_action % 11;
-				if ( divbyeleven ) {
+				if ( divbyeleven === 0 ) {
 					var $mg = $(this).find('.cAc_wpsml-mg');
 				}
 				else {	
