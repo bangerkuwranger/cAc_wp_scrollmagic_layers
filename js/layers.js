@@ -149,23 +149,17 @@ jQuery(function($) {
 		
 		if (resize_action) {
 
-			if (typeof('waitForFinalEvent') == 'function') {
-		
-				waitForFinalEvent( function() {
-					$('.cAc_wpsml-pageSection').each( function() {
-		
-						var thisId = $(this).attr('id'),
-						$bg = false;
-						$mg = ((resize_action % 11) ? (this).find('.cAc_wpsml-mg') : false),
-						$media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
-						$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
-						loadSectionScene( thisId, $bg, mg, media, trim );
-			
-					});
-		
-				}, 500, 'cAc_wpsml_loadMoreStuff');
-		
-			}
+			$('.cAc_wpsml-pageSection').each( function() {
+
+				var thisId = $(this).attr('id'),
+				$bg = false;
+				$mg = ((resize_action % 11) ? (this).find('.cAc_wpsml-mg') : false),
+				$media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
+				$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
+				loadSectionScene( thisId, $bg, mg, media, trim );
+	
+			});
+
 		}
 	});
 
