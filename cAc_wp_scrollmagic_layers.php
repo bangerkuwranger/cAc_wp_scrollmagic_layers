@@ -329,7 +329,7 @@ function cAc_wpsml_section_shortcode( $atts ) {
 
 	if( !empty( $section->post_content ) ) {
 		$html .= '<div class="cAc_wpsml-content">';
-			apply_filters( 'the_content', $section->post_content );
+			$html .= apply_filters( 'the_content', $section->post_content );
 		$html .= '</div>';
 	}
 
