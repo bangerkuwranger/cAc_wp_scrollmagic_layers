@@ -145,7 +145,7 @@ jQuery(function($) {
 	
 	$(window).resize(function () {
 		
-		var resize_action = cac_wpsml_bodyClass();
+		var resize_action = cac_wpsml_bodyClass(cAc_wpsmlViewport, breakpoints);
 		
 		if (resize_action) {
 
