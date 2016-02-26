@@ -231,7 +231,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 							tweens[thisId] = new TimelineMax().add([ 
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-mg", 1, {top: 100}, {top:0, ease: SlowMo.ease.config(0.7, 0.7, false)}),
 								TweenMax.fromTo("#" + thisId , 1, {top: 0}, {top:-25, ease: SlowMo.ease.config(0.7, 0.7, false)}),
-								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia, transform: rotate(0)}, {top:-100, transform: transMedia, ease: SlowMo.ease.config(0.7, 0.7, false)}),
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {css:{top: heightMedia, transform: rotate(0)}}, {css:{top:-100, transform: transMedia}, ease: SlowMo.ease.config(0.7, 0.7, false)}),
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia), ease: SlowMo.ease.config(0.7, 0.7, false)})
 							]);
 						}
