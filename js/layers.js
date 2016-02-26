@@ -153,9 +153,14 @@ jQuery(function($) {
 
 				var thisId = $(this).attr('id'),
 				$bg = false;
-				$mg = ((resize_action % 11) ? $(this).find('.cAc_wpsml-mg') : false),
-				$media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
-				$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
+				if ( (+resize_action % 11) =0 ) {
+					var $mg = $(this).find('.cAc_wpsml-mg')
+				}
+				else {	
+					var $mg = false;
+				}
+				var $media = ((resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
+				var $trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
 				loadSectionScene( thisId, $bg, mg, media, trim );
 	
 			});
