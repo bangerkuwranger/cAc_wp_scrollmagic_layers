@@ -328,6 +328,7 @@ function cac_wpsml_bodyClass( cAc_wpsmlViewport, breakpoints ) {
 
 	var sizeWas = 3;
 	var sizeIs = 0;
+	$body = jQuery('body');
 	
 	if (!document.body.classList.contains('bkpt-lg')) {
 		sizeWas = 2;
