@@ -230,10 +230,10 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 						if (typeof tweens[thisId] == "undefined") {
 							tweens[thisId] = new TimelineMax().add([ 
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-mg", 0.75, {top: 100}, {top:0}),
-								TweenMax.fromTo("#" + thisId , 1, {top: 50}, {top: 0}),
+								TweenMax.fromTo("#" + thisId , 1, {top: heightTriangle}, {top: 0}),
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-media", 1, {top: heightMedia, rotation: -15}, {top:-100, rotation: 15}),
 								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-content", 1, {top: jQuery(window).height()}, {top:(heightMedia)}),
-								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-trim > div", 1, {bottom: -(heightTrim)}, {bottom: heightTriangle})
+								TweenMax.fromTo("#" + thisId + " .cAc_wpsml-trim > div", 1, {bottom: -(heightTrim)}, {bottom: heightTriangle})//this selector is an issu, will throw an error below 1240
 							]);
 						}
 						if (typeof scenes[thisId] == "undefined") {
