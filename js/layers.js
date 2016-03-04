@@ -245,7 +245,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 
 							scenes[thisId].addTo(controller);
 							// show indicators (requires debug extension)
-							scenes[thisId].addIndicators();
+// 							scenes[thisId].addIndicators();
 						}
 		
 		
