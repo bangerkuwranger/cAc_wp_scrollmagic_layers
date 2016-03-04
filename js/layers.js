@@ -110,7 +110,7 @@ jQuery(function($) {
 					var $mg = false;
 				}
 				var $media = ((+resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-media') : false),
-				$trim = ((resize_action > 30) ? $(this).find('.cAc_wpsml-trim') : false);
+				$trim = ((+resize_action !== 31 && resize_action > 20) ? $(this).find('.cAc_wpsml-trim') : false);
 				loadSectionScene( thisId, $bg, $mg, $media, $trim );
 	
 			});
@@ -169,7 +169,7 @@ function loadSectionScene( id, bg, mg, media, trim ) {
 	}
 	
 	//only fetch trim if exists and above large breakpoint
-	if (trim && cAc_wpsmlViewport.width > breakpoints.lg) {
+	if (trim && cAc_wpsmlViewport.width > breakpoints.md) {
 		toFetch.trim = true;
 		trim.append(faLoader);
 	}
