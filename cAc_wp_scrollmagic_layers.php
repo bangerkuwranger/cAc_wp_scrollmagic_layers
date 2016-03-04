@@ -31,7 +31,7 @@ function cAc_wpsml_frontend_queue() {
 	//debug
 // 	wp_enqueue_script( 'cAc_wpsml_gsap_tweenmax', plugins_url( 'lib/gsap/TweenMax.js', __FILE__ ) );
 // 	wp_enqueue_script( 'cAc_wpsml_gsap_timelinemax', plugins_url( 'lib/gsap/TimelineMax.js', __FILE__ ) );
-// 	wp_enqueue_script( 'cAc_wpsml_scrollmagic_gsap', plugins_url( 'lib/scrollmagic/plugins/animation.gsap.js', __FILE__ ), array( 'jquery', 'cAc_wpsml_scrollmagic' ) );
+	wp_enqueue_script( 'cAc_wpsml_scrollmagic_gsap', plugins_url( 'lib/scrollmagic/plugins/animation.gsap.js', __FILE__ ), array( 'jquery', 'cAc_wpsml_scrollmagic' ) );
 // 	wp_enqueue_script( 'cAc_wpsml_scrollmagic', plugins_url( 'lib/scrollmagic/ScrollMagic.js', __FILE__ ), array( 'jquery', 'cAc_wpsml_gsap_tweenmax', 'cAc_wpsml_gsap_timelinemax' ) );
 // 	wp_enqueue_script( 'cAc_wpsml_scrollmagic_debug', plugins_url( 'lib/scrollmagic/plugins/debug.addIndicators.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
 	wp_register_script( 'cAc_wpsml_scrollmagic_layers', plugins_url( 'js/layers.js', __FILE__ ), array( 'cAc_wpsml_scrollmagic' ) );
